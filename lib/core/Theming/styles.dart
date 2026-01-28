@@ -8,9 +8,10 @@ class TextStyles {
     fontWeight: FontWeight.w700,
     color: Colors.black,
   );
-  static TextStyle font11GreyRegular = TextStyle(
+  static TextStyle font11Grey400weight = TextStyle(
+    // regular
     fontSize: 11.sp,
-    fontWeight: FontWeight.normal,
+    fontWeight: FontWeight.w400,
     color: ColorsManager.grey,
   );
   static TextStyle font32Green700Weight = TextStyle(
@@ -18,9 +19,54 @@ class TextStyles {
     fontWeight: FontWeight.w700,
     color: ColorsManager.mainGreen,
   );
-  static TextStyle font16White500Weight = TextStyle(
+  static TextStyle font16White600Weight = TextStyle(
     fontSize: 16.sp,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w600,
     color: Colors.white,
+  );
+  static TextStyle font24MainGreen700Weight = TextStyle(
+    fontSize: 24.sp,
+    fontWeight: FontWeight.w700,
+    color: ColorsManager.mainGreen,
+  );
+  static TextStyle font14Grey400Weight = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
+    color: ColorsManager.grey,
+  );
+  static TextStyle font14LightGrey400Weight = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
+    color: ColorsManager.lightGrey,
+  );
+  static TextStyle font14DarkBlue500Weight = TextStyle(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w500,
+    color: ColorsManager.darkBlue,
+  );
+  static TextStyle font12MainGreen400Weight = TextStyle(
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w400,
+    color: ColorsManager.mainGreen,
+  );
+  static TextStyle font13Grey400Weight = TextStyle(
+    fontSize: 13.sp,
+    fontWeight: FontWeight.w400,
+    color: ColorsManager.grey,
+  );
+  static TextStyle font13DarkBlue500Weight = TextStyle(
+    fontSize: 13.sp,
+    fontWeight: FontWeight.w500,
+    color: ColorsManager.darkBlue,
+  );
+  static TextStyle font13DarkBlue400Weight = TextStyle(
+    fontSize: 13.sp,
+    fontWeight: FontWeight.w400,
+    color: ColorsManager.darkBlue,
+  );
+  static TextStyle font13MainGreen600Weight = TextStyle(
+    fontSize: 13.sp,
+    fontWeight: FontWeight.w600,
+    color: ColorsManager.mainGreen,
   );
 }
