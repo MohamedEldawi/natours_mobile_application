@@ -25,7 +25,7 @@ class OnboardingScreen extends StatelessWidget {
                     children: [
                       Text(
                         'Manage and plan all of your tours easily with Natours to enjoy a whole new travel experience.',
-                        style: TextStyles.font11GreyRegular,
+                        style: TextStyles.font11Grey400weight,
                         textAlign: TextAlign.center,
                       ),
                       SizedBox(height: 30.h),
