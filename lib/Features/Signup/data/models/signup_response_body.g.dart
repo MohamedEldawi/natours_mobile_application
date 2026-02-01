@@ -1,23 +1,23 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'login_response_body.dart';
+part of 'signup_response_body.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-LoginResponseBody _$LoginResponseBodyFromJson(Map<String, dynamic> json) =>
-    LoginResponseBody(
+SignupResponseBody _$SignupResponseBodyFromJson(Map<String, dynamic> json) =>
+    SignupResponseBody(
       status: json['status'] as String?,
-      token: json['token'] as String?,
-      userData: json['data'] == null
+      data: json['data'] == null
           ? null
           : UserData.fromJson(json['data'] as Map<String, dynamic>),
+      token: json['token'] as String?,
     );
 
-Map<String, dynamic> _$LoginResponseBodyToJson(LoginResponseBody instance) =>
+Map<String, dynamic> _$SignupResponseBodyToJson(SignupResponseBody instance) =>
     <String, dynamic>{
       'status': instance.status,
       'token': instance.token,
-      'data': instance.userData,
+      'data': instance.data,
     };

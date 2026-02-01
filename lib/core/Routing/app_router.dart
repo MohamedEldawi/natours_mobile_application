@@ -4,6 +4,8 @@ import 'package:natours_application/Features/Home/home_screen.dart';
 import 'package:natours_application/Features/Login/logic/cubit/login_cubit.dart';
 import 'package:natours_application/Features/Login/ui/login_screen.dart';
 import 'package:natours_application/Features/Onboarding/onboarding_screen.dart';
+import 'package:natours_application/Features/Signup/logic/cubit/signup_cubit.dart';
+import 'package:natours_application/Features/Signup/ui/signup_screen.dart';
 import 'package:natours_application/core/Routing/routes.dart';
 import 'package:natours_application/core/di/dependency_injection.dart';
 
@@ -17,6 +19,13 @@ class AppRouter {
           builder: (_) => BlocProvider(
             create: (context) => getIt<LoginCubit>(),
             child: LoginScreen(),
+          ),
+        );
+      case Routes.signupScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<SignupCubit>(),
+            child: const SignupScreen(),
           ),
         );
       case Routes.homeScreen:
