@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:natours_application/Features/Login/logic/cubit/login_cubit.dart';
-import 'package:natours_application/Features/Login/logic/cubit/login_state.dart';
+import 'package:natours_application/Features/Signup/logic/cubit/signup_cubit.dart';
+import 'package:natours_application/Features/Signup/logic/cubit/signup_state.dart';
 import 'package:natours_application/core/Helpers/extensions.dart';
 import 'package:natours_application/core/Routing/routes.dart';
 import 'package:natours_application/core/Theming/colors.dart';
 import 'package:natours_application/core/Theming/styles.dart';
 
-class LoginBlocListener extends StatelessWidget {
-  const LoginBlocListener({super.key});
+class SignupBlocListener extends StatelessWidget {
+  const SignupBlocListener({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LoginCubit, LoginState>(
+    return BlocListener<SignupCubit, SignupState>(
       listenWhen: (previous, current) {
         return current is Loading || current is Success || current is Error;
       },
@@ -32,10 +32,10 @@ class LoginBlocListener extends StatelessWidget {
           },
           success: (data) {
             context.pop();
-            context.pushNamed(Routes.homeScreen);
+            showSuccessDialouge(context);
           },
           error: (error) {
-            setupErrorState(context, error);
+            setupErrorState(error, context);
           },
         );
       },
@@ -43,7 +43,32 @@ class LoginBlocListener extends StatelessWidget {
     );
   }
 
-  void setupErrorState(BuildContext context, String error) {
+  void showSuccessDialouge(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Signup Successful'),
+          content: Text('Congratulations, you have signed up successfully!'),
+          actions: [
+            TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: ColorsManager.mainGreen,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(),
+              ),
+              onPressed: () {
+                context.pushNamed(Routes.loginScreen);
+              },
+              child: Text('Continue'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void setupErrorState(String error, BuildContext context) {
     context.pop();
     showDialog(
       context: context,

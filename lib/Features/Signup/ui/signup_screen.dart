@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:natours_application/Features/Login/logic/cubit/login_cubit.dart';
-import 'package:natours_application/Features/Login/ui/widgets/do_not_have_an_account_text.dart';
-import 'package:natours_application/Features/Login/ui/widgets/email_and_password.dart';
-import 'package:natours_application/Features/Login/ui/widgets/login_bloc_listener.dart';
 import 'package:natours_application/Features/Login/ui/widgets/terms_and_conditions_text.dart';
-import 'package:natours_application/core/Theming/styles.dart';
+import 'package:natours_application/Features/Signup/logic/cubit/signup_cubit.dart';
+import 'package:natours_application/Features/Signup/ui/widgets/already_have_an_account_text.dart';
+import 'package:natours_application/Features/Signup/ui/widgets/signup_bloc_listener.dart';
+import 'package:natours_application/Features/Signup/ui/widgets/signup_form.dart';
 import 'package:natours_application/core/Helpers/spaces.dart';
+import 'package:natours_application/core/Theming/styles.dart';
 import 'package:natours_application/core/widgets/app_text_button.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatelessWidget {
+  const SignupScreen({super.key});
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,31 +24,22 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Welcome Back',
+                  'Create Account',
                   style: TextStyles.font24MainGreen700Weight,
                 ),
                 verticalSpace(8),
                 Text(
-                  'We\'re excited to have you back, can\'t wait to see what you\'ve been up to since you last logged in.',
+                  'Sign up now and start exploring all that our app has to offer. We\'re excited to welcome you to our community!',
                   style: TextStyles.font14Grey400Weight,
                 ),
                 verticalSpace(36),
-                EmailAndPassword(),
-
-                verticalSpace(25),
-                Align(
-                  alignment: AlignmentDirectional.centerEnd,
-                  child: Text(
-                    'Forgot Password?',
-                    style: TextStyles.font12MainGreen400Weight,
-                  ),
-                ),
+                SignupForm(),
                 verticalSpace(41),
                 AppTextButton(
-                  buttonText: "Login",
+                  buttonText: 'Create Account',
                   textStyle: TextStyles.font16White600Weight,
                   onPressed: () {
-                    validateThenDoLogin(context);
+                    validateThenDosignup(context);
                   },
                 ),
                 verticalSpace(16),
@@ -61,9 +47,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 verticalSpace(60),
                 Align(
                   alignment: AlignmentDirectional.center,
-                  child: DoNotHaveAnAccountText(),
+                  child: AlreadyHaveAnAccountText(),
                 ),
-                LoginBlocListener(),
+                SignupBlocListener(),
               ],
             ),
           ),
@@ -72,9 +58,9 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void validateThenDoLogin(BuildContext context) {
-    if (context.read<LoginCubit>().formKey.currentState!.validate()) {
-      context.read<LoginCubit>().emitLoginStates();
+  void validateThenDosignup(BuildContext context) {
+    if (context.read<SignupCubit>().formKey.currentState!.validate()) {
+      context.read<SignupCubit>().emitSinupStates();
     }
   }
 }
