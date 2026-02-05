@@ -7,4 +7,5 @@ class ColorsManager {
   static const Color lighterGrey = Color(0xFFEDEDED);
   static const Color moreLighterGrey = Color(0xFFFDFDFF);
   static const Color darkBlue = Color(0xFF242424);
+  static const Color cardFooterGrey = Color(0xFFf7f7f7);
 }

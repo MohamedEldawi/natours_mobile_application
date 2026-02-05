@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:natours_application/Features/Home/home_screen.dart';
+import 'package:natours_application/Features/Home/ui/screens/home_screen.dart';
 import 'package:natours_application/Features/Login/logic/cubit/login_cubit.dart';
 import 'package:natours_application/Features/Login/ui/login_screen.dart';
 import 'package:natours_application/Features/Onboarding/onboarding_screen.dart';

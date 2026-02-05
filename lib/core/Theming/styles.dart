@@ -79,4 +79,25 @@ class TextStyles {
     fontWeight: FontWeight.w600,
     color: ColorsManager.mainGreen,
   );
+  static TextStyle font18DarkBlue700weight = TextStyle(
+    fontSize: 18.sp,
+    fontWeight: FontWeight.w700,
+    color: ColorsManager.darkBlue,
+  );
+
+  static TextStyle font10Grey400Weight = TextStyle(
+    fontSize: 10.sp,
+    fontWeight: FontWeight.w400,
+    color: ColorsManager.grey,
+  );
+  static TextStyle font15DarkBlue700Weight = TextStyle(
+    fontSize: 15.sp,
+    fontWeight: FontWeight.w700,
+    color: ColorsManager.darkBlue,
+  );
+  static TextStyle font15White300Weight = TextStyle(
+    fontSize: 15.sp,
+    fontWeight: FontWeight.w300,
+    color: Colors.white,
+  );
 }
