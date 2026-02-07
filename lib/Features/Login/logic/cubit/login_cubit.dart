@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:natours_application/Features/Login/data/models/login_request_body.dart';
 import 'package:natours_application/Features/Login/data/repos/login_repo.dart';
+import 'package:natours_application/core/Helpers/constants.dart';
+import 'package:natours_application/core/Helpers/shared_pref_helper.dart';
 import 'package:natours_application/core/networking/api_result.dart';
 import 'login_state.dart';
 
@@ -22,12 +24,17 @@ class LoginCubit extends Cubit<LoginState> {
       ),
     );
     response.when(
-      success: (data) {
+      success: (data) async {
+        await saveUserToken(data.token ?? '');
         emit(LoginState.success(data));
       },
       failure: (error) {
         emit(LoginState.error(error));
       },
     );
+  }
+
+  Future<void> saveUserToken(String token) async {
+    await SharedPrefHelper.setData(SharedPrefKeys.userToken, token);
   }
 }
