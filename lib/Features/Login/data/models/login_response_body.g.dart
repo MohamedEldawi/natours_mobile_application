@@ -21,3 +21,13 @@ Map<String, dynamic> _$LoginResponseBodyToJson(LoginResponseBody instance) =>
       'token': instance.token,
       'data': instance.userData,
     };
+
+UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
+  user: json['user'] == null
+      ? null
+      : User.fromJson(json['user'] as Map<String, dynamic>),
+);
+
+Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
+  'user': instance.user,
+};

@@ -12,3 +12,11 @@ class LoginResponseBody {
   factory LoginResponseBody.fromJson(Map<String, dynamic> json) =>
       _$LoginResponseBodyFromJson(json);
 }
+
+@JsonSerializable()
+class UserData {
+  User? user;
+  UserData({this.user});
+  factory UserData.fromJson(Map<String, dynamic> json) =>
+      _$UserDataFromJson(json);
+}

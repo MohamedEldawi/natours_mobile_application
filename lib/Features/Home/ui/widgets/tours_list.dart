@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:natours_application/Features/Home/data/models/tours_response.dart';
 import 'package:natours_application/Features/Home/ui/widgets/tour_card.dart';
 import 'package:natours_application/core/Helpers/spaces.dart';
 
 class ToursList extends StatelessWidget {
-  const ToursList({super.key});
+  final List<TourModel> tours;
+  const ToursList({super.key, required this.tours});
 
   @override
   Widget build(BuildContext context) {
@@ -11,11 +13,11 @@ class ToursList extends StatelessWidget {
       separatorBuilder: (context, index) {
         return verticalSpace(30);
       },
-      itemCount: 10,
+      itemCount: tours.length,
       shrinkWrap: true,
       physics: ClampingScrollPhysics(),
       itemBuilder: (context, index) {
-        return TourCard();
+        return TourCard(tour: tours[index]);
       },
     );
   }

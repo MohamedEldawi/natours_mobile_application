@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:natours_application/core/Helpers/extensions.dart';
+import 'package:natours_application/core/Routing/routes.dart';
 import 'package:natours_application/core/Theming/colors.dart';
 import 'package:natours_application/core/Theming/styles.dart';
 
 class TourCardFooter extends StatelessWidget {
-  final int price;
-  final String rating;
+  final double price;
+  final double rating;
   final int ratingsNumber;
   const TourCardFooter({
     super.key,
@@ -62,7 +64,9 @@ class TourCardFooter extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: ColorsManager.mainGreen,
               ),
-              onPressed: () {},
+              onPressed: () {
+                context.pushNamed(Routes.detailsScreen);
+              },
               child: Text('DETAILS', style: TextStyle(color: Colors.white)),
             ),
           ],

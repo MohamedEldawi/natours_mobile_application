@@ -1,7 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:natours_application/core/Helpers/spaces.dart';
+import 'package:natours_application/core/Theming/colors.dart';
 import 'package:natours_application/core/Theming/styles.dart';
+import 'package:shimmer/shimmer.dart';
 
 class TourCardImageAndName extends StatelessWidget {
   final String image;
@@ -16,31 +19,43 @@ class TourCardImageAndName extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       flex: 2,
-      child: Stack(
-        children: [
-          ClipPath(
-            clipper: BottomCurve(),
-            child: Container(
-              width: double.infinity,
-              foregroundDecoration: BoxDecoration(
-                color: Colors.green.withValues(alpha: 0.5),
+      child: CachedNetworkImage(
+        progressIndicatorBuilder: (context, url, progress) {
+          return Shimmer.fromColors(
+            baseColor: ColorsManager.lightGrey,
+            highlightColor: Colors.white,
+            child: Container(width: double.infinity, color: Colors.white),
+          );
+        },
+        imageUrl: image,
+        imageBuilder: (context, imageProvider) {
+          return Stack(
+            children: [
+              ClipPath(
+                clipper: BottomCurve(),
+                child: Container(
+                  width: double.infinity,
+                  foregroundDecoration: BoxDecoration(
+                    color: Colors.green.withValues(alpha: 0.5),
+                  ),
+                  child: Image(image: imageProvider, fit: BoxFit.cover),
+                ),
               ),
-              child: Image.asset(image, fit: BoxFit.cover),
-            ),
-          ),
-          Positioned(
-            right: 20,
-            bottom: 5,
-            child: buildTourName(tourName: tourName),
-          ),
-        ],
+              Positioned(
+                right: 20,
+                bottom: 5,
+                child: buildTourName(tourName: tourName),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
 
   Widget buildTourName({required String tourName}) {
     TextStyle style = TextStyles.font15White300Weight;
-    double maxWidth = 150.w;
+    double maxWidth = 100.w;
     TextPainter textPainter = TextPainter(
       textDirection: TextDirection.ltr,
       maxLines: 2,
@@ -82,7 +97,7 @@ class TourCardImageAndName extends StatelessWidget {
     required TextStyle style,
   }) {
     return Container(
-      constraints: BoxConstraints(maxWidth: 200.w),
+      constraints: BoxConstraints(maxWidth: 150.w),
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
       color: Colors.green.withValues(alpha: 0.8),
       child: Text(

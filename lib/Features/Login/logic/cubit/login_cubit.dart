@@ -5,6 +5,7 @@ import 'package:natours_application/Features/Login/data/repos/login_repo.dart';
 import 'package:natours_application/core/Helpers/constants.dart';
 import 'package:natours_application/core/Helpers/shared_pref_helper.dart';
 import 'package:natours_application/core/networking/api_result.dart';
+import 'package:natours_application/core/networking/dio_factory.dart';
 import 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
@@ -36,5 +37,6 @@ class LoginCubit extends Cubit<LoginState> {
 
   Future<void> saveUserToken(String token) async {
     await SharedPrefHelper.setData(SharedPrefKeys.userToken, token);
+    DioFactory.setTokenIntoHeaderAfterLogin(token);
   }
 }
