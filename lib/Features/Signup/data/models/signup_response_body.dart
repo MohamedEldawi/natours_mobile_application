@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:natours_application/Features/User/data/models/user.dart';
+import 'package:natours_application/Features/Login/data/models/login_response_body.dart';
 part 'signup_response_body.g.dart';
 
 @JsonSerializable()

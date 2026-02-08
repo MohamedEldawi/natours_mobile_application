@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:natours_application/Features/Home/ui/widgets/avatar_image.dart';
+import 'package:natours_application/Features/Home/ui/widgets/user_name_text.dart';
 import 'package:natours_application/core/Theming/styles.dart';
 
 class TopbarRow extends StatelessWidget {
@@ -11,15 +13,12 @@ class TopbarRow extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Hi, Mohamed!', style: TextStyles.font18DarkBlue700weight),
+            UserNameText(),
             Text('How Are You Today?', style: TextStyles.font11Grey400weight),
           ],
         ),
         Spacer(),
-        CircleAvatar(
-          radius: 24,
-          backgroundImage: AssetImage('assets/images/user-default.jpg'),
-        ),
+        AvatarImage(),
       ],
     );
   }

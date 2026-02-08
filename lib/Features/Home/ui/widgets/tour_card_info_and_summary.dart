@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:natours_application/core/Helpers/spaces.dart';
 import 'package:natours_application/core/Theming/colors.dart';
 import 'package:natours_application/core/Theming/styles.dart';
+import 'package:intl/intl.dart';
 
 class TourCardInfoAndSummary extends StatelessWidget {
   final String difficulty;
@@ -37,11 +38,11 @@ class TourCardInfoAndSummary extends StatelessWidget {
               text: TextSpan(
                 children: [
                   TextSpan(
-                    text: difficulty,
+                    text: difficulty.toUpperCase(),
                     style: TextStyles.font18DarkBlue700weight,
                   ),
                   TextSpan(
-                    text: '${duaration.toString()}-DAY TOUR',
+                    text: ' ${duaration.toString()}-DAY TOUR',
                     style: TextStyles.font18DarkBlue700weight,
                   ),
                 ],
@@ -63,7 +64,7 @@ class TourCardInfoAndSummary extends StatelessWidget {
                 ),
                 horizontalSpace(20),
                 buildDateAndMaxGroupSizeColumn(
-                  date: startDate,
+                  date: dateFormater(startDate),
                   maxGroupSize: maxGroupSize,
                 ),
               ],
@@ -141,5 +142,11 @@ class TourCardInfoAndSummary extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  String dateFormater(String date) {
+    final dateTime = DateTime.parse(date).toLocal();
+    final formatedDate = DateFormat('MMMM yyyy').format(dateTime);
+    return formatedDate;
   }
 }

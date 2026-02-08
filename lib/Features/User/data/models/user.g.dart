@@ -6,15 +6,15 @@ part of 'user.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
-  user: json['user'] == null
-      ? null
-      : User.fromJson(json['user'] as Map<String, dynamic>),
-);
+UserResponseModel _$UserResponseModelFromJson(Map<String, dynamic> json) =>
+    UserResponseModel(
+      data: json['data'] == null
+          ? null
+          : User.fromJson(json['data'] as Map<String, dynamic>),
+    );
 
-Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
-  'user': instance.user,
-};
+Map<String, dynamic> _$UserResponseModelToJson(UserResponseModel instance) =>
+    <String, dynamic>{'data': instance.data};
 
 User _$UserFromJson(Map<String, dynamic> json) => User(
   id: json['id'] as String?,

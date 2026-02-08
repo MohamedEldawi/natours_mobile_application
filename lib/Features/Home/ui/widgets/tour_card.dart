@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:natours_application/Features/Home/data/models/tours_response.dart';
 import 'package:natours_application/Features/Home/ui/widgets/tour_card_footer.dart';
 import 'package:natours_application/Features/Home/ui/widgets/tour_card_image_and_name.dart';
 import 'package:natours_application/Features/Home/ui/widgets/tour_card_info_and_summary.dart';
+import 'package:natours_application/core/networking/api_constants.dart';
 
 class TourCard extends StatelessWidget {
-  const TourCard({super.key});
+  final TourModel? tour;
+  const TourCard({super.key, required this.tour});
 
   @override
   Widget build(BuildContext context) {
@@ -18,20 +21,23 @@ class TourCard extends StatelessWidget {
       child: Column(
         children: [
           TourCardImageAndName(
-            image: 'assets/images/tour-2-1.jpeg',
-            tourName: "THE MOUNTAIN BIKER",
+            image: '${ApiConstants.baseToursImageUrl}${tour!.imageCover}',
+            tourName: tour?.name ?? 'name',
           ),
           TourCardInfoAndSummary(
-            difficulty: "MEDIUM",
-            duaration: 10,
-            summary:
-                'Breathing in Nature in America\'s most spectacular National Parks',
-            startLocation: 'Las Vegas, USA',
-            startDate: 'March 2027',
-            maxGroupSize: 15,
-            stops: 4,
+            difficulty: tour?.difficulty ?? '',
+            duaration: tour?.duration ?? 0,
+            summary: tour?.summary ?? '',
+            startLocation: tour?.startLocation!.description ?? '',
+            startDate: tour?.startDates![0] ?? '',
+            maxGroupSize: tour?.maxGroupSize ?? 0,
+            stops: tour?.startDates!.length ?? 0,
           ),
-          TourCardFooter(price: 497, rating: '4.8', ratingsNumber: 6),
+          TourCardFooter(
+            price: tour?.price ?? 0,
+            rating: tour?.ratingsAverage ?? 0,
+            ratingsNumber: tour?.ratingsQuantity ?? 0,
+          ),
         ],
       ),
     );

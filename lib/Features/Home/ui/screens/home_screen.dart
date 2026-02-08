@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:natours_application/Features/Home/ui/widgets/home_screen_bloc_builder.dart';
 import 'package:natours_application/Features/Home/ui/widgets/topbar_row.dart';
-import 'package:natours_application/Features/Home/ui/widgets/tours_list.dart';
 import 'package:natours_application/core/Helpers/spaces.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
               children: [
                 TopbarRow(),
                 verticalSpace(20),
-                Container(color: Colors.white, child: ToursList()),
+                Container(color: Colors.white, child: HomeScreenBlocBuilder()),
               ],
             ),
           ),

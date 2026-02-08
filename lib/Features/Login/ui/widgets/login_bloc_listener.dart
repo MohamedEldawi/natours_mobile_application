@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:natours_application/Features/Login/logic/cubit/login_cubit.dart';
 import 'package:natours_application/Features/Login/logic/cubit/login_state.dart';
+import 'package:natours_application/Features/User/logic/cubit/user_response_cubit.dart';
 import 'package:natours_application/core/Helpers/extensions.dart';
 import 'package:natours_application/core/Routing/routes.dart';
 import 'package:natours_application/core/Theming/colors.dart';
@@ -31,6 +32,7 @@ class LoginBlocListener extends StatelessWidget {
             );
           },
           success: (data) {
+            context.read<UserResponseCubit>().loadUserInLoginSuccess();
             context.pop();
             context.pushNamed(Routes.homeScreen);
           },
