@@ -53,7 +53,7 @@ class HomeScreenBlocBuilder extends StatelessWidget {
                 backgroundColor: ColorsManager.mainGreen,
               ),
               onPressed: () {
-                context.read<UserResponseCubit>().loadUser();
+                context.read<UserResponseCubit>().loadUserInLoginSuccess();
                 context.read<HomeScreenCubit>().emitHomeScreenStates();
               },
               child: Text('Retry', style: TextStyle(color: Colors.white)),
