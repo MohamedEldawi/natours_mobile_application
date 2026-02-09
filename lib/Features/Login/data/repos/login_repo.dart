@@ -3,6 +3,7 @@ import 'package:natours_application/Features/Login/data/models/login_request_bod
 import 'package:natours_application/Features/Login/data/models/login_response_body.dart';
 import 'package:natours_application/core/networking/api_result.dart';
 import 'package:natours_application/core/networking/api_service.dart';
+import 'package:natours_application/core/networking/error_handler.dart';
 import 'package:natours_application/core/networking/error_model.dart';
 
 class LoginRepo {
@@ -15,8 +16,8 @@ class LoginRepo {
     try {
       final response = await _apiService.login(loginRequestBody);
       return ApiResult.success(response);
-    } on DioException catch (error) {
-      final apiError = ErrorModel.fromJson(error.response?.data);
+    } on DioException catch (e) {
+      final ErrorModel apiError = ErrorHandler.handleApiError(e);
       return ApiResult.failure(apiError.message!);
     }
   }

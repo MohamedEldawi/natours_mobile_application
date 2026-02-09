@@ -13,7 +13,7 @@ import 'package:natours_application/core/Routing/routes.dart';
 import 'package:natours_application/core/di/dependency_injection.dart';
 
 class AppRouter {
-  Route generateRoute(RouteSettings settings) {
+  Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.onboardingScreen:
         return MaterialPageRoute(builder: (_) => const OnboardingScreen());
@@ -42,12 +42,8 @@ class AppRouter {
         );
       case Routes.detailsScreen:
         return MaterialPageRoute(builder: (context) => const DetailsScreen());
-      default:
-        return MaterialPageRoute(
-          builder: (_) => Scaffold(
-            body: Center(child: Text("No route defined for: ${settings.name}")),
-          ),
-        );
+      // default:
+      //   return null;
     }
   }
 }
