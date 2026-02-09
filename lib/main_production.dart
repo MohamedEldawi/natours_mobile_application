@@ -28,8 +28,10 @@ void main() async {
 }
 
 Future<void> checkIfUserLoggedIn() async {
-  // await SharedPrefHelper.clearAllData();
-  String userToken = await SharedPrefHelper.getString(SharedPrefKeys.userToken);
+  // await SharedPrefHelper.clearAllSecureDate();
+  String userToken = await SharedPrefHelper.getSecureString(
+    SharedPrefKeys.userToken,
+  );
   if (userToken.isNotEmpty && !(JwtDecoder.isExpired(userToken))) {
     isLoggedIn = true;
   } else {
