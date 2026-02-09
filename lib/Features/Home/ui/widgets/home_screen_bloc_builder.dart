@@ -6,6 +6,8 @@ import 'package:natours_application/Features/Home/logic/cubit/home_screen_cubit.
 import 'package:natours_application/Features/Home/logic/cubit/home_screen_state.dart';
 import 'package:natours_application/Features/Home/ui/widgets/shimmer_loading.dart';
 import 'package:natours_application/Features/Home/ui/widgets/tours_list.dart';
+import 'package:natours_application/Features/User/logic/cubit/user_response_cubit.dart';
+import 'package:natours_application/core/Theming/colors.dart';
 
 class HomeScreenBlocBuilder extends StatelessWidget {
   const HomeScreenBlocBuilder({super.key});
@@ -28,13 +30,37 @@ class HomeScreenBlocBuilder extends StatelessWidget {
             return ToursList(tours: tours ?? []);
           },
           toursError: (message) {
-            return Center(child: Text(message));
+            return setupError(message, context);
           },
           orElse: () {
             return const SizedBox.shrink();
           },
         );
       },
+    );
+  }
+
+  Widget setupError(String errorMessage, BuildContext context) {
+    return SizedBox(
+      height: 700.h,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(errorMessage),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: ColorsManager.mainGreen,
+              ),
+              onPressed: () {
+                context.read<UserResponseCubit>().loadUser();
+                context.read<HomeScreenCubit>().emitHomeScreenStates();
+              },
+              child: Text('Retry', style: TextStyle(color: Colors.white)),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
