@@ -16,7 +16,7 @@ class NatoursApp extends StatelessWidget {
       minTextAdapt: true,
       child: MaterialApp(
         onGenerateRoute: router.generateRoute,
-        initialRoute: isLoggedIn ? Routes.homeScreen : Routes.onboardingScreen,
+        initialRoute: Routes.splashScreen,
         theme: ThemeData(
           primaryColor: ColorsManager.mainGreen,
           scaffoldBackgroundColor: Colors.white,

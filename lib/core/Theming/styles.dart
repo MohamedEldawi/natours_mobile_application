@@ -24,6 +24,12 @@ class TextStyles {
     fontWeight: FontWeight.w600,
     color: Colors.white,
   );
+  static TextStyle font32WhiteBold = TextStyle(
+    fontSize: 32.sp,
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+    letterSpacing: 1.5,
+  );
   static TextStyle font24MainGreen700Weight = TextStyle(
     fontSize: 24.sp,
     fontWeight: FontWeight.w700,

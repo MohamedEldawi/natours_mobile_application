@@ -7,7 +7,7 @@ import 'package:natours_application/core/networking/api_constants.dart';
 import 'package:shimmer/shimmer.dart';
 
 class TopbarRow extends StatelessWidget {
-  final UserResponseModel user;
+  final User user;
   const TopbarRow({super.key, required this.user});
 
   @override
@@ -18,7 +18,7 @@ class TopbarRow extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Hi, ${user.data!.name}!',
+              'Hi, ${user.name!.split(' ').first.toUpperCase()}!',
               style: TextStyles.font18DarkBlue700weight,
             ),
             Text('How Are You Today?', style: TextStyles.font11Grey400weight),
@@ -33,7 +33,7 @@ class TopbarRow extends StatelessWidget {
               child: CircleAvatar(radius: 24, backgroundColor: Colors.white),
             );
           },
-          imageUrl: '${ApiConstants.baseUsersImageUrl}${user.data!.photo}',
+          imageUrl: '${ApiConstants.baseUsersImageUrl}${user.photo}',
           imageBuilder: (context, imageProvider) {
             return CircleAvatar(radius: 24, backgroundImage: imageProvider);
           },

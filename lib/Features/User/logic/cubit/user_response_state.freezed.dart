@@ -128,7 +128,7 @@ return userError(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  userLoading,TResult Function( UserResponseModel user)?  userSuccess,TResult Function( String message)?  userError,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  userLoading,TResult Function( User user)?  userSuccess,TResult Function( String message)?  userError,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case UserLoading() when userLoading != null:
@@ -152,7 +152,7 @@ return userError(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  userLoading,required TResult Function( UserResponseModel user)  userSuccess,required TResult Function( String message)  userError,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  userLoading,required TResult Function( User user)  userSuccess,required TResult Function( String message)  userError,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case UserLoading():
@@ -175,7 +175,7 @@ return userError(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  userLoading,TResult? Function( UserResponseModel user)?  userSuccess,TResult? Function( String message)?  userError,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  userLoading,TResult? Function( User user)?  userSuccess,TResult? Function( String message)?  userError,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case UserLoading() when userLoading != null:
@@ -260,7 +260,7 @@ class UserSuccess implements UserResponseState {
   const UserSuccess(this.user);
   
 
- final  UserResponseModel user;
+ final  User user;
 
 /// Create a copy of UserResponseState
 /// with the given fields replaced by the non-null parameter values.
@@ -292,7 +292,7 @@ abstract mixin class $UserSuccessCopyWith<$Res> implements $UserResponseStateCop
   factory $UserSuccessCopyWith(UserSuccess value, $Res Function(UserSuccess) _then) = _$UserSuccessCopyWithImpl;
 @useResult
 $Res call({
- UserResponseModel user
+ User user
 });
 
 
@@ -312,7 +312,7 @@ class _$UserSuccessCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') $Res call({Object? user = null,}) {
   return _then(UserSuccess(
 null == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
-as UserResponseModel,
+as User,
   ));
 }
 

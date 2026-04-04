@@ -9,12 +9,15 @@ import 'package:natours_application/Features/Login/ui/login_screen.dart';
 import 'package:natours_application/Features/Onboarding/onboarding_screen.dart';
 import 'package:natours_application/Features/Signup/logic/cubit/signup_cubit.dart';
 import 'package:natours_application/Features/Signup/ui/signup_screen.dart';
+import 'package:natours_application/Features/splash/splash_screen.dart';
 import 'package:natours_application/core/Routing/routes.dart';
 import 'package:natours_application/core/di/dependency_injection.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case Routes.splashScreen:
+        return MaterialPageRoute(builder: (_) => const SplashScreen());
       case Routes.onboardingScreen:
         return MaterialPageRoute(builder: (_) => const OnboardingScreen());
       case Routes.loginScreen:

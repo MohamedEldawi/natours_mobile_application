@@ -7,7 +7,6 @@ part 'user_response_state.freezed.dart';
 class UserResponseState with _$UserResponseState {
   const factory UserResponseState.initial() = _Initial;
   const factory UserResponseState.userLoading() = UserLoading;
-  const factory UserResponseState.userSuccess(UserResponseModel user) =
-      UserSuccess;
+  const factory UserResponseState.userSuccess(User user) = UserSuccess;
   const factory UserResponseState.userError(String message) = UserError;
 }

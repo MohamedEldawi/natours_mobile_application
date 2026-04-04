@@ -9,10 +9,10 @@ class Userrepo {
   final ApiService _apiService;
 
   Userrepo({required ApiService apiService}) : _apiService = apiService;
-  Future<ApiResult<UserResponseModel>> getUser() async {
+  Future<ApiResult<User>> getUser() async {
     try {
       final response = await _apiService.getUserData();
-      return ApiResult.success(response);
+      return ApiResult.success(response.data!);
     } on DioException catch (e) {
       final ErrorModel apiError = ErrorHandler.handleApiError(e);
       return ApiResult.failure(apiError.message!);
