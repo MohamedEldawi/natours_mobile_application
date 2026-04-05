@@ -14,8 +14,8 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
       success: (toursResponse) {
         emit(HomeScreenState.toursSuccess(toursResponse));
       },
-      failure: (errorMessage) {
-        emit(HomeScreenState.toursError(errorMessage));
+      failure: (error) {
+        emit(HomeScreenState.toursError(error.message));
       },
     );
   }

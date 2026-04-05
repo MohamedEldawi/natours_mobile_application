@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:natours_application/Features/User/data/models/user.dart';
+import 'package:natours_application/core/networking/api_failure.dart';
 import 'package:natours_application/core/networking/api_result.dart';
 import 'package:natours_application/core/networking/api_service.dart';
 import 'package:natours_application/core/networking/error_handler.dart';
@@ -14,8 +15,8 @@ class Userrepo {
       final response = await _apiService.getUserData();
       return ApiResult.success(response.data!);
     } on DioException catch (e) {
-      final ErrorModel apiError = ErrorHandler.handleApiError(e);
-      return ApiResult.failure(apiError.message!);
+      final ApiFailure apiError = ErrorHandler.handleApiError(e);
+      return ApiResult.failure(apiError);
     }
   }
 }
