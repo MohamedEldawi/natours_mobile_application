@@ -18,6 +18,23 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool _messageShown = false;
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_messageShown) return;
+    final String? message =
+        ModalRoute.of(context)?.settings.arguments as String?;
+    if (message != null && message.isNotEmpty) {
+      _messageShown = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(message), backgroundColor: Colors.red),
+        );
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

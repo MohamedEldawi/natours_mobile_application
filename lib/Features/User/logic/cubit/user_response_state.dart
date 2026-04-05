@@ -9,4 +9,6 @@ class UserResponseState with _$UserResponseState {
   const factory UserResponseState.userLoading() = UserLoading;
   const factory UserResponseState.userSuccess(User user) = UserSuccess;
   const factory UserResponseState.userError(String message) = UserError;
+  const factory UserResponseState.userUnauthorized(String message) =
+      UserUnauthorized;
 }

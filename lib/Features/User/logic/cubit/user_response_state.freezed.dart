@@ -55,14 +55,15 @@ extension UserResponseStatePatterns on UserResponseState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( UserLoading value)?  userLoading,TResult Function( UserSuccess value)?  userSuccess,TResult Function( UserError value)?  userError,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( UserLoading value)?  userLoading,TResult Function( UserSuccess value)?  userSuccess,TResult Function( UserError value)?  userError,TResult Function( UserUnauthorized value)?  userUnauthorized,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case UserLoading() when userLoading != null:
 return userLoading(_that);case UserSuccess() when userSuccess != null:
 return userSuccess(_that);case UserError() when userError != null:
-return userError(_that);case _:
+return userError(_that);case UserUnauthorized() when userUnauthorized != null:
+return userUnauthorized(_that);case _:
   return orElse();
 
 }
@@ -80,14 +81,15 @@ return userError(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( UserLoading value)  userLoading,required TResult Function( UserSuccess value)  userSuccess,required TResult Function( UserError value)  userError,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( UserLoading value)  userLoading,required TResult Function( UserSuccess value)  userSuccess,required TResult Function( UserError value)  userError,required TResult Function( UserUnauthorized value)  userUnauthorized,}){
 final _that = this;
 switch (_that) {
 case _Initial():
 return initial(_that);case UserLoading():
 return userLoading(_that);case UserSuccess():
 return userSuccess(_that);case UserError():
-return userError(_that);case _:
+return userError(_that);case UserUnauthorized():
+return userUnauthorized(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -104,14 +106,15 @@ return userError(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( UserLoading value)?  userLoading,TResult? Function( UserSuccess value)?  userSuccess,TResult? Function( UserError value)?  userError,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( UserLoading value)?  userLoading,TResult? Function( UserSuccess value)?  userSuccess,TResult? Function( UserError value)?  userError,TResult? Function( UserUnauthorized value)?  userUnauthorized,}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case UserLoading() when userLoading != null:
 return userLoading(_that);case UserSuccess() when userSuccess != null:
 return userSuccess(_that);case UserError() when userError != null:
-return userError(_that);case _:
+return userError(_that);case UserUnauthorized() when userUnauthorized != null:
+return userUnauthorized(_that);case _:
   return null;
 
 }
@@ -128,13 +131,14 @@ return userError(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  userLoading,TResult Function( User user)?  userSuccess,TResult Function( String message)?  userError,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  userLoading,TResult Function( User user)?  userSuccess,TResult Function( String message)?  userError,TResult Function( String message)?  userUnauthorized,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case UserLoading() when userLoading != null:
 return userLoading();case UserSuccess() when userSuccess != null:
 return userSuccess(_that.user);case UserError() when userError != null:
-return userError(_that.message);case _:
+return userError(_that.message);case UserUnauthorized() when userUnauthorized != null:
+return userUnauthorized(_that.message);case _:
   return orElse();
 
 }
@@ -152,13 +156,14 @@ return userError(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  userLoading,required TResult Function( User user)  userSuccess,required TResult Function( String message)  userError,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  userLoading,required TResult Function( User user)  userSuccess,required TResult Function( String message)  userError,required TResult Function( String message)  userUnauthorized,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case UserLoading():
 return userLoading();case UserSuccess():
 return userSuccess(_that.user);case UserError():
-return userError(_that.message);case _:
+return userError(_that.message);case UserUnauthorized():
+return userUnauthorized(_that.message);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -175,13 +180,14 @@ return userError(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  userLoading,TResult? Function( User user)?  userSuccess,TResult? Function( String message)?  userError,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  userLoading,TResult? Function( User user)?  userSuccess,TResult? Function( String message)?  userError,TResult? Function( String message)?  userUnauthorized,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case UserLoading() when userLoading != null:
 return userLoading();case UserSuccess() when userSuccess != null:
 return userSuccess(_that.user);case UserError() when userError != null:
-return userError(_that.message);case _:
+return userError(_that.message);case UserUnauthorized() when userUnauthorized != null:
+return userUnauthorized(_that.message);case _:
   return null;
 
 }
@@ -377,6 +383,72 @@ class _$UserErrorCopyWithImpl<$Res>
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
   return _then(UserError(
+null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class UserUnauthorized implements UserResponseState {
+  const UserUnauthorized(this.message);
+  
+
+ final  String message;
+
+/// Create a copy of UserResponseState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UserUnauthorizedCopyWith<UserUnauthorized> get copyWith => _$UserUnauthorizedCopyWithImpl<UserUnauthorized>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserUnauthorized&&(identical(other.message, message) || other.message == message));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'UserResponseState.userUnauthorized(message: $message)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $UserUnauthorizedCopyWith<$Res> implements $UserResponseStateCopyWith<$Res> {
+  factory $UserUnauthorizedCopyWith(UserUnauthorized value, $Res Function(UserUnauthorized) _then) = _$UserUnauthorizedCopyWithImpl;
+@useResult
+$Res call({
+ String message
+});
+
+
+
+
+}
+/// @nodoc
+class _$UserUnauthorizedCopyWithImpl<$Res>
+    implements $UserUnauthorizedCopyWith<$Res> {
+  _$UserUnauthorizedCopyWithImpl(this._self, this._then);
+
+  final UserUnauthorized _self;
+  final $Res Function(UserUnauthorized) _then;
+
+/// Create a copy of UserResponseState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+  return _then(UserUnauthorized(
 null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String,
   ));

@@ -7,4 +7,5 @@ class ApiConstants {
   static const String getAllTours = "tours";
   static const String baseToursImageUrl = "$baseUrl/img/tours/";
   static const String baseUsersImageUrl = "$baseUrl/img/users/";
+  static const String unauthorizedMessage = "Unauthorized Access";
 }

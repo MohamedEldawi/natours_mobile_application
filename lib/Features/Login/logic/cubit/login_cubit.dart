@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:natours_application/Features/Login/data/models/login_request_body.dart';
 import 'package:natours_application/Features/Login/data/repos/login_repo.dart';
+import 'package:natours_application/Features/User/data/models/user.dart';
 import 'package:natours_application/core/Helpers/constants.dart';
-import 'package:natours_application/core/Helpers/shared_pref_helper.dart';
 import 'package:natours_application/core/networking/api_result.dart';
 import 'package:natours_application/core/networking/dio_factory.dart';
+import 'package:natours_application/core/services.dart/user_service.dart';
 import 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
@@ -26,7 +27,13 @@ class LoginCubit extends Cubit<LoginState> {
     );
     response.when(
       success: (data) async {
-        await saveUserToken(data.token ?? '');
+        await UserService().saveUserToken(data.token ?? '');
+        final user = data.userData?.user;
+        isLoggedIn = true;
+        if (user != null) {
+          await saveUser(user);
+        }
+        DioFactory.setTokenIntoHeaderAfterLogin(data.token ?? '');
         emit(LoginState.success(data));
       },
       failure: (error) {
@@ -35,8 +42,7 @@ class LoginCubit extends Cubit<LoginState> {
     );
   }
 
-  Future<void> saveUserToken(String token) async {
-    await SharedPrefHelper.setSecureString(SharedPrefKeys.userToken, token);
-    DioFactory.setTokenIntoHeaderAfterLogin(token);
+  Future<void> saveUser(User user) async {
+    await UserService().saveUser(user);
   }
 }

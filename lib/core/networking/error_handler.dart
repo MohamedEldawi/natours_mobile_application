@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:natours_application/core/networking/api_constants.dart';
 import 'package:natours_application/core/networking/error_model.dart';
 
 class ErrorHandler {
@@ -20,6 +21,9 @@ class ErrorHandler {
             message: 'Send time out in connection with the server',
           );
         case DioExceptionType.badResponse:
+          if (error.response!.statusCode == 401) {
+            return ErrorModel(message: ApiConstants.unauthorizedMessage);
+          }
           return ErrorModel.fromJson(error.response?.data);
         default:
           return ErrorModel(message: 'Something Went Wrong');
