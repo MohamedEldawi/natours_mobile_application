@@ -6,7 +6,7 @@ import 'package:natours_application/Features/User/data/models/user.dart';
 import 'package:natours_application/core/Helpers/constants.dart';
 import 'package:natours_application/core/networking/api_result.dart';
 import 'package:natours_application/core/networking/dio_factory.dart';
-import 'package:natours_application/core/services.dart/user_service.dart';
+import 'package:natours_application/core/services/user_service.dart';
 import 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {

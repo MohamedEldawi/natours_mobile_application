@@ -16,20 +16,22 @@ class HomeScreenBlocBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeScreenCubit, HomeScreenState>(
       buildWhen: (previous, current) {
-        return current is ToursLoading ||
-            current is ToursSuccess ||
-            current is ToursError;
+        return current is ToursLoading || current is Loaded || current is Error;
       },
       builder: (context, state) {
         return state.maybeWhen(
           toursLoading: () {
             return ShimmerLoading();
           },
-          toursSuccess: (toursResponse) {
-            final List<TourModel>? tours = toursResponse.data!.tours;
-            return ToursList(tours: tours ?? []);
+          toursLoaded: (toursResponse , isFromCache, refreshing, refreshErrorMessage) {
+            final List<TourModel>? tours = toursResponse.data?.tours;
+            return Column(
+              children: [if (refreshing) const LinearProgressIndicator(),
+                ToursList(tours: tours ?? []),
+              ],
+            );
           },
-          toursError: (message) {
+          error: (message) {
             return setupError(message, context);
           },
           orElse: () {
@@ -54,7 +56,7 @@ class HomeScreenBlocBuilder extends StatelessWidget {
               ),
               onPressed: () {
                 context.read<UserResponseCubit>().loadUserInLoginSuccess();
-                context.read<HomeScreenCubit>().emitHomeScreenStates();
+                context.read<HomeScreenCubit>().loadTours();
               },
               child: Text('Retry', style: TextStyle(color: Colors.white)),
             ),

@@ -14,7 +14,7 @@ ToursResponse _$ToursResponseFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$ToursResponseToJson(ToursResponse instance) =>
-    <String, dynamic>{'data': instance.data};
+    <String, dynamic>{'data': instance.data?.toJson()};
 
 ToursData _$ToursDataFromJson(Map<String, dynamic> json) => ToursData(
   tours: (json['documents'] as List<dynamic>?)
@@ -23,7 +23,7 @@ ToursData _$ToursDataFromJson(Map<String, dynamic> json) => ToursData(
 );
 
 Map<String, dynamic> _$ToursDataToJson(ToursData instance) => <String, dynamic>{
-  'documents': instance.tours,
+  'documents': instance.tours?.map((e) => e.toJson()).toList(),
 };
 
 TourModel _$TourModelFromJson(Map<String, dynamic> json) => TourModel(
@@ -48,7 +48,7 @@ TourModel _$TourModelFromJson(Map<String, dynamic> json) => TourModel(
 Map<String, dynamic> _$TourModelToJson(TourModel instance) => <String, dynamic>{
   'id': instance.id,
   'name': instance.name,
-  'startLocation': instance.startLocation,
+  'startLocation': instance.startLocation?.toJson(),
   'duration': instance.duration,
   'maxGroupSize': instance.maxGroupSize,
   'difficulty': instance.difficulty,

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:natours_application/Features/Home/data/repos/home_screen_repo.dart';
+import 'package:natours_application/Features/Home/data/services/tours_cache_service.dart';
 import 'package:natours_application/Features/Login/data/repos/login_repo.dart';
 import 'package:natours_application/Features/Login/logic/cubit/login_cubit.dart';
 import 'package:natours_application/Features/Signup/data/repos/signup_repo.dart';
@@ -31,8 +32,12 @@ void setupGetIt() {
     () => SignupCubit(signupRepo: getIt<SignupRepo>()),
   );
   // Home screen
+  getIt.registerLazySingleton<ToursCacheService>(() => ToursCacheService());
   getIt.registerLazySingleton(
-    () => HomeScreenRepo(apiService: getIt<ApiService>()),
+    () => HomeScreenRepo(
+      apiService: getIt<ApiService>(),
+      cacheService: getIt<ToursCacheService>(),
+    ),
   );
   // User
   getIt.registerLazySingleton(() => Userrepo(apiService: getIt<ApiService>()));

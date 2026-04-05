@@ -2,24 +2,28 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:natours_application/Features/Home/data/models/start_location.dart';
 part 'tours_response.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class ToursResponse {
   final ToursData? data;
   ToursResponse({this.data});
   factory ToursResponse.fromJson(Map<String, dynamic> json) =>
       _$ToursResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ToursResponseToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class ToursData {
   @JsonKey(name: 'documents')
   final List<TourModel>? tours;
   ToursData({this.tours});
   factory ToursData.fromJson(Map<String, dynamic> json) =>
       _$ToursDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ToursDataToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class TourModel {
   final String? id;
   final String? name;
@@ -54,4 +58,6 @@ class TourModel {
   );
   factory TourModel.fromJson(Map<String, dynamic> json) =>
       _$TourModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TourModelToJson(this);
 }

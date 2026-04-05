@@ -3,7 +3,7 @@ import 'package:natours_application/Features/User/data/repos/user_repo.dart';
 import 'package:natours_application/core/Helpers/constants.dart';
 import 'package:natours_application/core/networking/api_constants.dart';
 import 'package:natours_application/core/networking/api_result.dart';
-import 'package:natours_application/core/services.dart/user_service.dart';
+import 'package:natours_application/core/services/user_service.dart';
 import 'user_response_state.dart';
 
 class UserResponseCubit extends Cubit<UserResponseState> {
