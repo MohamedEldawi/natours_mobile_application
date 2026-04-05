@@ -38,12 +38,12 @@ class UserResponseCubit extends Cubit<UserResponseState> {
         await UserService().saveUser(user);
         emit(UserResponseState.userSuccess(user));
       },
-      failure: (message) async {
-        if (message == ApiConstants.unauthorizedMessage) {
+      failure: (error) async {
+        if (error.statusCode == 401) {
           await clearUserWhenNotAuthorized();
           return;
         }
-        emit(UserResponseState.userError(message));
+        emit(UserResponseState.userError(error.message));
       },
     );
   }
@@ -55,8 +55,8 @@ class UserResponseCubit extends Cubit<UserResponseState> {
         await UserService().saveUser(user);
         emit(UserResponseState.userSuccess(user));
       },
-      failure: (message) async {
-        if (message == ApiConstants.unauthorizedMessage) {
+      failure: (error) async {
+        if (error.statusCode == 401) {
           await clearUserWhenNotAuthorized();
         }
       },
@@ -68,7 +68,7 @@ class UserResponseCubit extends Cubit<UserResponseState> {
     isLoggedIn = false;
     emit(
       const UserResponseState.userUnauthorized(
-        ApiConstants.unauthorizedMessage,
+        ApiConstants.invalidTokenMessage,
       ),
     );
   }

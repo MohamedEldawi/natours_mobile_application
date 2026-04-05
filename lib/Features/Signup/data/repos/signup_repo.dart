@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:natours_application/Features/Signup/data/models/signup_request_body.dart';
 import 'package:natours_application/Features/Signup/data/models/signup_response_body.dart';
+import 'package:natours_application/core/networking/api_failure.dart';
 import 'package:natours_application/core/networking/api_result.dart';
 import 'package:natours_application/core/networking/api_service.dart';
 import 'package:natours_application/core/networking/error_handler.dart';
@@ -17,8 +18,8 @@ class SignupRepo {
       final response = await _apiService.signup(signupRequestBody);
       return ApiResult.success(response);
     } on DioException catch (e) {
-      final ErrorModel apiError = ErrorHandler.handleApiError(e);
-      return ApiResult.failure(apiError.message!);
+      final ApiFailure apiError = ErrorHandler.handleApiError(e);
+      return ApiResult.failure(apiError);
     }
   }
 }
