@@ -7,16 +7,61 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
   final HomeScreenRepo homeScreenRepo;
   HomeScreenCubit({required this.homeScreenRepo})
     : super(HomeScreenState.intial());
-  Future<void> emitHomeScreenStates() async {
+  Future<void> loadTours() async {
+    final cachedTours = homeScreenRepo.getCachedTours();
+    if (cachedTours != null) {
+      emit(
+        HomeScreenState.toursLoaded(
+          toursResponse: cachedTours,
+          isFromCache: true,
+          refreshing: true,
+        ),
+      );
+      await refreshTours();
+      return;
+    }
     emit(HomeScreenState.toursLoading());
-    final response = await homeScreenRepo.getAllTours();
+    await refreshTours();
+  }
+
+  Future<void> refreshTours() async {
+    final currentLoadedState = _loadedState;
+    if (currentLoadedState != null && !currentLoadedState.refreshing) {
+      emit(
+        currentLoadedState.copyWith(
+          refreshing: true,
+          refreshErrorMessage: null,
+        ),
+      );
+    }
+    final response = await homeScreenRepo.refreshTours();
     response.when(
       success: (toursResponse) {
-        emit(HomeScreenState.toursSuccess(toursResponse));
+        emit(
+          HomeScreenState.toursLoaded(
+            toursResponse: toursResponse,
+            isFromCache: false,
+            refreshing: false,
+          ),
+        );
       },
       failure: (error) {
-        emit(HomeScreenState.toursError(error.message));
+        if (currentLoadedState != null) {
+          emit(
+            currentLoadedState.copyWith(
+              refreshing: false,
+              refreshErrorMessage: error.message,
+            ),
+          );
+        } else {
+          emit(HomeScreenState.error(error.message));
+        }
       },
     );
   }
+
+  Loaded? get _loadedState => state.maybeMap(
+    toursLoaded: (loadedState) => loadedState,
+    orElse: () => null,
+  );
 }

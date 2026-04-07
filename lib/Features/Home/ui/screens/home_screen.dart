@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:natours_application/Features/Home/logic/cubit/home_screen_cubit.dart';
 import 'package:natours_application/Features/Home/ui/widgets/home_screen_bloc_builder.dart';
 import 'package:natours_application/Features/Home/ui/widgets/top_bar_bloc_builder.dart';
 import 'package:natours_application/Features/User/logic/cubit/user_response_cubit.dart';
@@ -29,19 +30,27 @@ class HomeScreen extends StatelessWidget {
       },
       child: Scaffold(
         body: SafeArea(
-          child: SingleChildScrollView(
-            child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-              width: double.infinity,
-              child: Column(
-                children: [
-                  TopBarBlocBuilder(),
-                  verticalSpace(20),
-                  Container(
-                    color: Colors.white,
-                    child: HomeScreenBlocBuilder(),
-                  ),
-                ],
+          child: RefreshIndicator(
+            onRefresh: () async {
+              await Future.wait([
+                context.read<UserResponseCubit>().refreshUserInBackground(),
+                context.read<HomeScreenCubit>().refreshTours(),
+              ]);
+            },
+            child: SingleChildScrollView(
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+                width: double.infinity,
+                child: Column(
+                  children: [
+                    TopBarBlocBuilder(),
+                    verticalSpace(20),
+                    Container(
+                      color: Colors.white,
+                      child: HomeScreenBlocBuilder(),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

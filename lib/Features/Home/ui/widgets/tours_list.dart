@@ -15,7 +15,7 @@ class ToursList extends StatelessWidget {
       },
       itemCount: tours.length,
       shrinkWrap: true,
-      physics: ClampingScrollPhysics(),
+      physics: const ClampingScrollPhysics(),
       itemBuilder: (context, index) {
         return TourCard(tour: tours[index]);
       },

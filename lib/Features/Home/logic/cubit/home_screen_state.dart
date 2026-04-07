@@ -6,7 +6,11 @@ part 'home_screen_state.freezed.dart';
 class HomeScreenState with _$HomeScreenState {
   const factory HomeScreenState.intial() = _Initial;
   const factory HomeScreenState.toursLoading() = ToursLoading;
-  const factory HomeScreenState.toursSuccess(ToursResponse toursResponse) =
-      ToursSuccess;
-  const factory HomeScreenState.toursError(String message) = ToursError;
+  const factory HomeScreenState.toursLoaded({
+    required ToursResponse toursResponse,
+    required bool isFromCache,
+    required bool refreshing,
+    String? refreshErrorMessage,
+  }) = Loaded;
+  const factory HomeScreenState.error(String message) = Error;
 }

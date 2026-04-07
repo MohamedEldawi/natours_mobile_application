@@ -55,14 +55,14 @@ extension HomeScreenStatePatterns on HomeScreenState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  intial,TResult Function( ToursLoading value)?  toursLoading,TResult Function( ToursSuccess value)?  toursSuccess,TResult Function( ToursError value)?  toursError,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  intial,TResult Function( ToursLoading value)?  toursLoading,TResult Function( Loaded value)?  toursLoaded,TResult Function( Error value)?  error,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Initial() when intial != null:
 return intial(_that);case ToursLoading() when toursLoading != null:
-return toursLoading(_that);case ToursSuccess() when toursSuccess != null:
-return toursSuccess(_that);case ToursError() when toursError != null:
-return toursError(_that);case _:
+return toursLoading(_that);case Loaded() when toursLoaded != null:
+return toursLoaded(_that);case Error() when error != null:
+return error(_that);case _:
   return orElse();
 
 }
@@ -80,14 +80,14 @@ return toursError(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  intial,required TResult Function( ToursLoading value)  toursLoading,required TResult Function( ToursSuccess value)  toursSuccess,required TResult Function( ToursError value)  toursError,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  intial,required TResult Function( ToursLoading value)  toursLoading,required TResult Function( Loaded value)  toursLoaded,required TResult Function( Error value)  error,}){
 final _that = this;
 switch (_that) {
 case _Initial():
 return intial(_that);case ToursLoading():
-return toursLoading(_that);case ToursSuccess():
-return toursSuccess(_that);case ToursError():
-return toursError(_that);case _:
+return toursLoading(_that);case Loaded():
+return toursLoaded(_that);case Error():
+return error(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -104,14 +104,14 @@ return toursError(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  intial,TResult? Function( ToursLoading value)?  toursLoading,TResult? Function( ToursSuccess value)?  toursSuccess,TResult? Function( ToursError value)?  toursError,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  intial,TResult? Function( ToursLoading value)?  toursLoading,TResult? Function( Loaded value)?  toursLoaded,TResult? Function( Error value)?  error,}){
 final _that = this;
 switch (_that) {
 case _Initial() when intial != null:
 return intial(_that);case ToursLoading() when toursLoading != null:
-return toursLoading(_that);case ToursSuccess() when toursSuccess != null:
-return toursSuccess(_that);case ToursError() when toursError != null:
-return toursError(_that);case _:
+return toursLoading(_that);case Loaded() when toursLoaded != null:
+return toursLoaded(_that);case Error() when error != null:
+return error(_that);case _:
   return null;
 
 }
@@ -128,13 +128,13 @@ return toursError(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  intial,TResult Function()?  toursLoading,TResult Function( ToursResponse toursResponse)?  toursSuccess,TResult Function( String message)?  toursError,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  intial,TResult Function()?  toursLoading,TResult Function( ToursResponse toursResponse,  bool isFromCache,  bool refreshing,  String? refreshErrorMessage)?  toursLoaded,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when intial != null:
 return intial();case ToursLoading() when toursLoading != null:
-return toursLoading();case ToursSuccess() when toursSuccess != null:
-return toursSuccess(_that.toursResponse);case ToursError() when toursError != null:
-return toursError(_that.message);case _:
+return toursLoading();case Loaded() when toursLoaded != null:
+return toursLoaded(_that.toursResponse,_that.isFromCache,_that.refreshing,_that.refreshErrorMessage);case Error() when error != null:
+return error(_that.message);case _:
   return orElse();
 
 }
@@ -152,13 +152,13 @@ return toursError(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  intial,required TResult Function()  toursLoading,required TResult Function( ToursResponse toursResponse)  toursSuccess,required TResult Function( String message)  toursError,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  intial,required TResult Function()  toursLoading,required TResult Function( ToursResponse toursResponse,  bool isFromCache,  bool refreshing,  String? refreshErrorMessage)  toursLoaded,required TResult Function( String message)  error,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return intial();case ToursLoading():
-return toursLoading();case ToursSuccess():
-return toursSuccess(_that.toursResponse);case ToursError():
-return toursError(_that.message);case _:
+return toursLoading();case Loaded():
+return toursLoaded(_that.toursResponse,_that.isFromCache,_that.refreshing,_that.refreshErrorMessage);case Error():
+return error(_that.message);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -175,13 +175,13 @@ return toursError(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  intial,TResult? Function()?  toursLoading,TResult? Function( ToursResponse toursResponse)?  toursSuccess,TResult? Function( String message)?  toursError,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  intial,TResult? Function()?  toursLoading,TResult? Function( ToursResponse toursResponse,  bool isFromCache,  bool refreshing,  String? refreshErrorMessage)?  toursLoaded,TResult? Function( String message)?  error,}) {final _that = this;
 switch (_that) {
 case _Initial() when intial != null:
 return intial();case ToursLoading() when toursLoading != null:
-return toursLoading();case ToursSuccess() when toursSuccess != null:
-return toursSuccess(_that.toursResponse);case ToursError() when toursError != null:
-return toursError(_that.message);case _:
+return toursLoading();case Loaded() when toursLoaded != null:
+return toursLoaded(_that.toursResponse,_that.isFromCache,_that.refreshing,_that.refreshErrorMessage);case Error() when error != null:
+return error(_that.message);case _:
   return null;
 
 }
@@ -256,43 +256,46 @@ String toString() {
 /// @nodoc
 
 
-class ToursSuccess implements HomeScreenState {
-  const ToursSuccess(this.toursResponse);
+class Loaded implements HomeScreenState {
+  const Loaded({required this.toursResponse, required this.isFromCache, required this.refreshing, this.refreshErrorMessage});
   
 
  final  ToursResponse toursResponse;
+ final  bool isFromCache;
+ final  bool refreshing;
+ final  String? refreshErrorMessage;
 
 /// Create a copy of HomeScreenState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$ToursSuccessCopyWith<ToursSuccess> get copyWith => _$ToursSuccessCopyWithImpl<ToursSuccess>(this, _$identity);
+$LoadedCopyWith<Loaded> get copyWith => _$LoadedCopyWithImpl<Loaded>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ToursSuccess&&(identical(other.toursResponse, toursResponse) || other.toursResponse == toursResponse));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Loaded&&(identical(other.toursResponse, toursResponse) || other.toursResponse == toursResponse)&&(identical(other.isFromCache, isFromCache) || other.isFromCache == isFromCache)&&(identical(other.refreshing, refreshing) || other.refreshing == refreshing)&&(identical(other.refreshErrorMessage, refreshErrorMessage) || other.refreshErrorMessage == refreshErrorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,toursResponse);
+int get hashCode => Object.hash(runtimeType,toursResponse,isFromCache,refreshing,refreshErrorMessage);
 
 @override
 String toString() {
-  return 'HomeScreenState.toursSuccess(toursResponse: $toursResponse)';
+  return 'HomeScreenState.toursLoaded(toursResponse: $toursResponse, isFromCache: $isFromCache, refreshing: $refreshing, refreshErrorMessage: $refreshErrorMessage)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $ToursSuccessCopyWith<$Res> implements $HomeScreenStateCopyWith<$Res> {
-  factory $ToursSuccessCopyWith(ToursSuccess value, $Res Function(ToursSuccess) _then) = _$ToursSuccessCopyWithImpl;
+abstract mixin class $LoadedCopyWith<$Res> implements $HomeScreenStateCopyWith<$Res> {
+  factory $LoadedCopyWith(Loaded value, $Res Function(Loaded) _then) = _$LoadedCopyWithImpl;
 @useResult
 $Res call({
- ToursResponse toursResponse
+ ToursResponse toursResponse, bool isFromCache, bool refreshing, String? refreshErrorMessage
 });
 
 
@@ -300,19 +303,22 @@ $Res call({
 
 }
 /// @nodoc
-class _$ToursSuccessCopyWithImpl<$Res>
-    implements $ToursSuccessCopyWith<$Res> {
-  _$ToursSuccessCopyWithImpl(this._self, this._then);
+class _$LoadedCopyWithImpl<$Res>
+    implements $LoadedCopyWith<$Res> {
+  _$LoadedCopyWithImpl(this._self, this._then);
 
-  final ToursSuccess _self;
-  final $Res Function(ToursSuccess) _then;
+  final Loaded _self;
+  final $Res Function(Loaded) _then;
 
 /// Create a copy of HomeScreenState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? toursResponse = null,}) {
-  return _then(ToursSuccess(
-null == toursResponse ? _self.toursResponse : toursResponse // ignore: cast_nullable_to_non_nullable
-as ToursResponse,
+@pragma('vm:prefer-inline') $Res call({Object? toursResponse = null,Object? isFromCache = null,Object? refreshing = null,Object? refreshErrorMessage = freezed,}) {
+  return _then(Loaded(
+toursResponse: null == toursResponse ? _self.toursResponse : toursResponse // ignore: cast_nullable_to_non_nullable
+as ToursResponse,isFromCache: null == isFromCache ? _self.isFromCache : isFromCache // ignore: cast_nullable_to_non_nullable
+as bool,refreshing: null == refreshing ? _self.refreshing : refreshing // ignore: cast_nullable_to_non_nullable
+as bool,refreshErrorMessage: freezed == refreshErrorMessage ? _self.refreshErrorMessage : refreshErrorMessage // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -322,8 +328,8 @@ as ToursResponse,
 /// @nodoc
 
 
-class ToursError implements HomeScreenState {
-  const ToursError(this.message);
+class Error implements HomeScreenState {
+  const Error(this.message);
   
 
  final  String message;
@@ -332,13 +338,13 @@ class ToursError implements HomeScreenState {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$ToursErrorCopyWith<ToursError> get copyWith => _$ToursErrorCopyWithImpl<ToursError>(this, _$identity);
+$ErrorCopyWith<Error> get copyWith => _$ErrorCopyWithImpl<Error>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ToursError&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Error&&(identical(other.message, message) || other.message == message));
 }
 
 
@@ -347,15 +353,15 @@ int get hashCode => Object.hash(runtimeType,message);
 
 @override
 String toString() {
-  return 'HomeScreenState.toursError(message: $message)';
+  return 'HomeScreenState.error(message: $message)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $ToursErrorCopyWith<$Res> implements $HomeScreenStateCopyWith<$Res> {
-  factory $ToursErrorCopyWith(ToursError value, $Res Function(ToursError) _then) = _$ToursErrorCopyWithImpl;
+abstract mixin class $ErrorCopyWith<$Res> implements $HomeScreenStateCopyWith<$Res> {
+  factory $ErrorCopyWith(Error value, $Res Function(Error) _then) = _$ErrorCopyWithImpl;
 @useResult
 $Res call({
  String message
@@ -366,17 +372,17 @@ $Res call({
 
 }
 /// @nodoc
-class _$ToursErrorCopyWithImpl<$Res>
-    implements $ToursErrorCopyWith<$Res> {
-  _$ToursErrorCopyWithImpl(this._self, this._then);
+class _$ErrorCopyWithImpl<$Res>
+    implements $ErrorCopyWith<$Res> {
+  _$ErrorCopyWithImpl(this._self, this._then);
 
-  final ToursError _self;
-  final $Res Function(ToursError) _then;
+  final Error _self;
+  final $Res Function(Error) _then;
 
 /// Create a copy of HomeScreenState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
-  return _then(ToursError(
+  return _then(Error(
 null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String,
   ));

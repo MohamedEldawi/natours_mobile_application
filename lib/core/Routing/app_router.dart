@@ -40,7 +40,7 @@ class AppRouter {
           builder: (_) => BlocProvider(
             create: (context) =>
                 HomeScreenCubit(homeScreenRepo: getIt<HomeScreenRepo>())
-                  ..emitHomeScreenStates(),
+                  ..loadTours(),
             child: const HomeScreen(),
           ),
         );
