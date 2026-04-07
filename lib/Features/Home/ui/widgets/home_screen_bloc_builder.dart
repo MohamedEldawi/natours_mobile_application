@@ -23,14 +23,21 @@ class HomeScreenBlocBuilder extends StatelessWidget {
           toursLoading: () {
             return ShimmerLoading();
           },
-          toursLoaded: (toursResponse , isFromCache, refreshing, refreshErrorMessage) {
-            final List<TourModel>? tours = toursResponse.data?.tours;
-            return Column(
-              children: [if (refreshing) const LinearProgressIndicator(),
-                ToursList(tours: tours ?? []),
-              ],
-            );
-          },
+          toursLoaded:
+              (toursResponse, isFromCache, refreshing, refreshErrorMessage) {
+                final List<TourModel>? tours = toursResponse.data?.tours;
+                if (!refreshing && refreshErrorMessage != null) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    showSnackBar(context, refreshErrorMessage);
+                  });
+                }
+                return Column(
+                  children: [
+                    if (refreshing) const LinearProgressIndicator(),
+                    ToursList(tours: tours ?? []),
+                  ],
+                );
+              },
           error: (message) {
             return setupError(message, context);
           },
@@ -63,6 +70,12 @@ class HomeScreenBlocBuilder extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void showSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message), backgroundColor: Colors.red),
     );
   }
 }

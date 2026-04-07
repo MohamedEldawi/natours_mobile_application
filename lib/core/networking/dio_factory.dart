@@ -7,7 +7,7 @@ class DioFactory {
   DioFactory._();
   static Dio? _dio;
   static Dio getDio() {
-    Duration timeOut = Duration(seconds: 30);
+    Duration timeOut = Duration(seconds: 10);
     if (_dio == null) {
       _dio = Dio();
       _dio!
