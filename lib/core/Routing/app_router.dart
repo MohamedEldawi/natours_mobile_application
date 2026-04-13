@@ -7,6 +7,7 @@ import 'package:natours_application/Features/Home/ui/screens/home_screen.dart';
 import 'package:natours_application/Features/Login/logic/cubit/login_cubit.dart';
 import 'package:natours_application/Features/Login/ui/login_screen.dart';
 import 'package:natours_application/Features/Onboarding/onboarding_screen.dart';
+import 'package:natours_application/Features/Profile/ui/profile_screen.dart';
 import 'package:natours_application/Features/Signup/logic/cubit/signup_cubit.dart';
 import 'package:natours_application/Features/Signup/ui/signup_screen.dart';
 import 'package:natours_application/Features/splash/splash_screen.dart';
@@ -46,6 +47,8 @@ class AppRouter {
         );
       case Routes.detailsScreen:
         return MaterialPageRoute(builder: (context) => const DetailsScreen());
+      case Routes.profileScreen:
+        return MaterialPageRoute(builder: (context) => const ProfileScreen());
       // default:
       //   return null;
     }

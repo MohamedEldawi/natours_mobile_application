@@ -15,6 +15,29 @@ class SignupForm extends StatefulWidget {
 class _SignupFormState extends State<SignupForm> {
   bool passwordIsObsecureText = true;
   bool passwordConfirmIsObsecureText = true;
+  late FocusNode nameFocusNode;
+  late FocusNode emailFocusNode;
+  late FocusNode passwordFocusNode;
+  late FocusNode passwordConfirmFocusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    nameFocusNode = FocusNode();
+    emailFocusNode = FocusNode();
+    passwordFocusNode = FocusNode();
+    passwordConfirmFocusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    nameFocusNode.dispose();
+    emailFocusNode.dispose();
+    passwordFocusNode.dispose();
+    passwordConfirmFocusNode.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -23,6 +46,10 @@ class _SignupFormState extends State<SignupForm> {
         children: [
           AppTextFormField(
             controller: context.read<SignupCubit>().nameController,
+            focusNode: nameFocusNode,
+            onSubmitted: (value) {
+              emailFocusNode.requestFocus();
+            },
             hint: 'name',
             validator: (value) {
               if (value == null || value.isEmpty || value.length < 3) {
@@ -33,6 +60,10 @@ class _SignupFormState extends State<SignupForm> {
           verticalSpace(16),
           AppTextFormField(
             controller: context.read<SignupCubit>().emailController,
+            focusNode: emailFocusNode,
+            onSubmitted: (value) {
+              passwordFocusNode.requestFocus();
+            },
             hint: 'email',
             validator: (value) {
               if (value == null ||
@@ -45,6 +76,10 @@ class _SignupFormState extends State<SignupForm> {
           verticalSpace(16),
           AppTextFormField(
             controller: context.read<SignupCubit>().passwordController,
+            focusNode: passwordFocusNode,
+            onSubmitted: (value) {
+              passwordConfirmFocusNode.requestFocus();
+            },
             hint: 'password',
             validator: (value) {
               if (value == null || value.isEmpty || value.length < 8) {
@@ -68,6 +103,10 @@ class _SignupFormState extends State<SignupForm> {
           verticalSpace(16),
           AppTextFormField(
             controller: context.read<SignupCubit>().passwordConfirmController,
+            focusNode: passwordConfirmFocusNode,
+            onSubmitted: (value) {
+              passwordConfirmFocusNode.unfocus();
+            },
             hint: 'confirm password',
             validator: (value) {
               if (value == null ||

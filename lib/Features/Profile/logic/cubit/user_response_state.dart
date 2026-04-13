@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:natours_application/Features/User/data/models/user.dart';
+import 'package:natours_application/Features/Profile/data/models/user.dart';
 
 part 'user_response_state.freezed.dart';
 
@@ -11,4 +11,5 @@ class UserResponseState with _$UserResponseState {
   const factory UserResponseState.userError(String message) = UserError;
   const factory UserResponseState.userUnauthorized(String message) =
       UserUnauthorized;
+  const factory UserResponseState.userLoggedOut() = UserLoggedOut;
 }

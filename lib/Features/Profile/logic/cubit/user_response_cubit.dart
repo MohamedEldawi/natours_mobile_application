@@ -1,8 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:natours_application/Features/User/data/repos/user_repo.dart';
+import 'package:natours_application/Features/Profile/data/repos/user_repo.dart';
 import 'package:natours_application/core/Helpers/constants.dart';
 import 'package:natours_application/core/networking/api_constants.dart';
 import 'package:natours_application/core/networking/api_result.dart';
+import 'package:natours_application/core/networking/dio_factory.dart';
 import 'package:natours_application/core/services/user_service.dart';
 import 'user_response_state.dart';
 
@@ -65,11 +66,19 @@ class UserResponseCubit extends Cubit<UserResponseState> {
 
   Future<void> clearUserWhenNotAuthorized() async {
     await UserService().clearUser();
+    DioFactory.clearTokenFromHeaderAfterLogout();
     isLoggedIn = false;
     emit(
       const UserResponseState.userUnauthorized(
         ApiConstants.invalidTokenMessage,
       ),
     );
+  }
+
+  Future<void> logout() async {
+    await UserService().clearUser();
+    DioFactory.clearTokenFromHeaderAfterLogout();
+    isLoggedIn = false;
+    emit(const UserResponseState.userLoggedOut());
   }
 }

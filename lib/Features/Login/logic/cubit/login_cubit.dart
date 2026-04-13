@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:natours_application/Features/Login/data/models/login_request_body.dart';
 import 'package:natours_application/Features/Login/data/repos/login_repo.dart';
-import 'package:natours_application/Features/User/data/models/user.dart';
+import 'package:natours_application/Features/Profile/data/models/user.dart';
 import 'package:natours_application/core/Helpers/constants.dart';
 import 'package:natours_application/core/networking/api_result.dart';
 import 'package:natours_application/core/networking/dio_factory.dart';

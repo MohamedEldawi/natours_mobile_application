@@ -4,7 +4,7 @@ import 'package:natours_application/Features/Login/data/models/login_request_bod
 import 'package:natours_application/Features/Login/data/models/login_response_body.dart';
 import 'package:natours_application/Features/Signup/data/models/signup_request_body.dart';
 import 'package:natours_application/Features/Signup/data/models/signup_response_body.dart';
-import 'package:natours_application/Features/User/data/models/user.dart';
+import 'package:natours_application/Features/Profile/data/models/user.dart';
 import 'package:natours_application/core/networking/api_constants.dart';
 import 'package:retrofit/retrofit.dart';
 part 'api_service.g.dart';

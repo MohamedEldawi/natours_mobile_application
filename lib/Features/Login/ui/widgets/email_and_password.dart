@@ -16,17 +16,24 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
   bool isObsecureText = true;
   late TextEditingController emailController;
   late TextEditingController passwordController;
+  late FocusNode emailFocusNode;
+  late FocusNode passwordFocusNode;
+
   @override
   void initState() {
     super.initState();
     emailController = context.read<LoginCubit>().emailController;
     passwordController = context.read<LoginCubit>().passwordController;
+    emailFocusNode = FocusNode();
+    passwordFocusNode = FocusNode();
   }
 
   @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
+    emailFocusNode.dispose();
+    passwordFocusNode.dispose();
     super.dispose();
   }
 
@@ -39,6 +46,10 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
           AppTextFormField(
             hint: 'Email',
             controller: context.read<LoginCubit>().emailController,
+            onSubmitted: (value) {
+              passwordFocusNode.requestFocus();
+            },
+            focusNode: emailFocusNode,
             validator: (value) {
               if (value == null ||
                   value.isEmpty ||
@@ -50,6 +61,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
           verticalSpace(16),
           AppTextFormField(
             controller: context.read<LoginCubit>().passwordController,
+            focusNode: passwordFocusNode,
             validator: (value) {
               if (value == null || value.isEmpty || value.length < 8) {
                 return "enter a valid password";

@@ -55,7 +55,7 @@ extension UserResponseStatePatterns on UserResponseState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( UserLoading value)?  userLoading,TResult Function( UserSuccess value)?  userSuccess,TResult Function( UserError value)?  userError,TResult Function( UserUnauthorized value)?  userUnauthorized,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( UserLoading value)?  userLoading,TResult Function( UserSuccess value)?  userSuccess,TResult Function( UserError value)?  userError,TResult Function( UserUnauthorized value)?  userUnauthorized,TResult Function( UserLoggedOut value)?  userLoggedOut,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
@@ -63,7 +63,8 @@ return initial(_that);case UserLoading() when userLoading != null:
 return userLoading(_that);case UserSuccess() when userSuccess != null:
 return userSuccess(_that);case UserError() when userError != null:
 return userError(_that);case UserUnauthorized() when userUnauthorized != null:
-return userUnauthorized(_that);case _:
+return userUnauthorized(_that);case UserLoggedOut() when userLoggedOut != null:
+return userLoggedOut(_that);case _:
   return orElse();
 
 }
@@ -81,7 +82,7 @@ return userUnauthorized(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( UserLoading value)  userLoading,required TResult Function( UserSuccess value)  userSuccess,required TResult Function( UserError value)  userError,required TResult Function( UserUnauthorized value)  userUnauthorized,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( UserLoading value)  userLoading,required TResult Function( UserSuccess value)  userSuccess,required TResult Function( UserError value)  userError,required TResult Function( UserUnauthorized value)  userUnauthorized,required TResult Function( UserLoggedOut value)  userLoggedOut,}){
 final _that = this;
 switch (_that) {
 case _Initial():
@@ -89,7 +90,8 @@ return initial(_that);case UserLoading():
 return userLoading(_that);case UserSuccess():
 return userSuccess(_that);case UserError():
 return userError(_that);case UserUnauthorized():
-return userUnauthorized(_that);case _:
+return userUnauthorized(_that);case UserLoggedOut():
+return userLoggedOut(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -106,7 +108,7 @@ return userUnauthorized(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( UserLoading value)?  userLoading,TResult? Function( UserSuccess value)?  userSuccess,TResult? Function( UserError value)?  userError,TResult? Function( UserUnauthorized value)?  userUnauthorized,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( UserLoading value)?  userLoading,TResult? Function( UserSuccess value)?  userSuccess,TResult? Function( UserError value)?  userError,TResult? Function( UserUnauthorized value)?  userUnauthorized,TResult? Function( UserLoggedOut value)?  userLoggedOut,}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
@@ -114,7 +116,8 @@ return initial(_that);case UserLoading() when userLoading != null:
 return userLoading(_that);case UserSuccess() when userSuccess != null:
 return userSuccess(_that);case UserError() when userError != null:
 return userError(_that);case UserUnauthorized() when userUnauthorized != null:
-return userUnauthorized(_that);case _:
+return userUnauthorized(_that);case UserLoggedOut() when userLoggedOut != null:
+return userLoggedOut(_that);case _:
   return null;
 
 }
@@ -131,14 +134,15 @@ return userUnauthorized(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  userLoading,TResult Function( User user)?  userSuccess,TResult Function( String message)?  userError,TResult Function( String message)?  userUnauthorized,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  userLoading,TResult Function( User user)?  userSuccess,TResult Function( String message)?  userError,TResult Function( String message)?  userUnauthorized,TResult Function()?  userLoggedOut,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case UserLoading() when userLoading != null:
 return userLoading();case UserSuccess() when userSuccess != null:
 return userSuccess(_that.user);case UserError() when userError != null:
 return userError(_that.message);case UserUnauthorized() when userUnauthorized != null:
-return userUnauthorized(_that.message);case _:
+return userUnauthorized(_that.message);case UserLoggedOut() when userLoggedOut != null:
+return userLoggedOut();case _:
   return orElse();
 
 }
@@ -156,14 +160,15 @@ return userUnauthorized(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  userLoading,required TResult Function( User user)  userSuccess,required TResult Function( String message)  userError,required TResult Function( String message)  userUnauthorized,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  userLoading,required TResult Function( User user)  userSuccess,required TResult Function( String message)  userError,required TResult Function( String message)  userUnauthorized,required TResult Function()  userLoggedOut,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case UserLoading():
 return userLoading();case UserSuccess():
 return userSuccess(_that.user);case UserError():
 return userError(_that.message);case UserUnauthorized():
-return userUnauthorized(_that.message);case _:
+return userUnauthorized(_that.message);case UserLoggedOut():
+return userLoggedOut();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -180,14 +185,15 @@ return userUnauthorized(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  userLoading,TResult? Function( User user)?  userSuccess,TResult? Function( String message)?  userError,TResult? Function( String message)?  userUnauthorized,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  userLoading,TResult? Function( User user)?  userSuccess,TResult? Function( String message)?  userError,TResult? Function( String message)?  userUnauthorized,TResult? Function()?  userLoggedOut,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case UserLoading() when userLoading != null:
 return userLoading();case UserSuccess() when userSuccess != null:
 return userSuccess(_that.user);case UserError() when userError != null:
 return userError(_that.message);case UserUnauthorized() when userUnauthorized != null:
-return userUnauthorized(_that.message);case _:
+return userUnauthorized(_that.message);case UserLoggedOut() when userLoggedOut != null:
+return userLoggedOut();case _:
   return null;
 
 }
@@ -456,5 +462,37 @@ as String,
 
 
 }
+
+/// @nodoc
+
+
+class UserLoggedOut implements UserResponseState {
+  const UserLoggedOut();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserLoggedOut);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'UserResponseState.userLoggedOut()';
+}
+
+
+}
+
+
+
 
 // dart format on

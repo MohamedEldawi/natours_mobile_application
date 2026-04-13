@@ -6,7 +6,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 class DioFactory {
   DioFactory._();
   static Dio? _dio;
-  static Dio getDio() {
+  static Future<Dio> getDio() async {
     Duration timeOut = Duration(seconds: 10);
     if (_dio == null) {
       _dio = Dio();
@@ -14,7 +14,7 @@ class DioFactory {
         ..options.sendTimeout = timeOut
         ..options.connectTimeout = timeOut;
       addDioInterceptor();
-      addDioHeaders();
+      await addDioHeaders();
       return _dio!;
     } else {
       return _dio!;
@@ -32,14 +32,26 @@ class DioFactory {
     );
   }
 
-  static void addDioHeaders() async {
-    _dio?.options.headers = {
-      'Authorization':
-          'Bearer ${await SharedPrefHelper.getSecureString(SharedPrefKeys.userToken)}',
-    };
+  static Future<void> addDioHeaders() async {
+    final token = await SharedPrefHelper.getSecureString(
+      SharedPrefKeys.userToken,
+    );
+    if (token.isEmpty) {
+      clearTokenFromHeaderAfterLogout();
+      return;
+    }
+    _dio?.options.headers['Authorization'] = 'Bearer $token';
   }
 
   static void setTokenIntoHeaderAfterLogin(String token) {
-    _dio?.options.headers = {'Authorization': 'Bearer $token'};
+    if (token.isEmpty) {
+      clearTokenFromHeaderAfterLogout();
+      return;
+    }
+    _dio?.options.headers['Authorization'] = 'Bearer $token';
+  }
+
+  static void clearTokenFromHeaderAfterLogout() {
+    _dio?.options.headers.remove('Authorization');
   }
 }

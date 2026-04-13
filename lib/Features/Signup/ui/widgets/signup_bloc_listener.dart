@@ -14,24 +14,11 @@ class SignupBlocListener extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<SignupCubit, SignupState>(
       listenWhen: (previous, current) {
-        return current is Loading || current is Success || current is Error;
+        return current is Success || current is Error;
       },
       listener: (context, state) {
         state.whenOrNull(
-          loading: () {
-            showDialog(
-              context: context,
-              builder: (context) {
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: ColorsManager.mainGreen,
-                  ),
-                );
-              },
-            );
-          },
           success: (data) {
-            context.pop();
             showSuccessDialouge(context);
           },
           error: (error) {
@@ -69,7 +56,6 @@ class SignupBlocListener extends StatelessWidget {
   }
 
   void setupErrorState(String error, BuildContext context) {
-    context.pop();
     showDialog(
       context: context,
       builder: (context) {
