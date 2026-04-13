@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:natours_application/Features/User/data/repos/user_repo.dart';
+import 'package:natours_application/Features/Profile/data/repos/user_repo.dart';
 import 'package:natours_application/Features/Home/data/services/tours_cache_service.dart';
-import 'package:natours_application/Features/User/logic/cubit/user_response_cubit.dart';
+import 'package:natours_application/Features/Profile/logic/cubit/user_response_cubit.dart';
 import 'package:natours_application/core/Helpers/constants.dart';
 import 'package:natours_application/core/Routing/app_router.dart';
 import 'package:natours_application/core/di/dependency_injection.dart';
@@ -15,9 +15,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
   await HiveService.initHive();
-  setupGetIt();
-  await getIt<ToursCacheService>().init();
   await checkIfUserLoggedIn();
+  await setupGetIt();
+  await getIt<ToursCacheService>().init();
   runApp(
     MultiBlocProvider(
       providers: [

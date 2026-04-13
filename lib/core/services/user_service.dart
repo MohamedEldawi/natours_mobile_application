@@ -1,5 +1,5 @@
 import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:natours_application/Features/User/data/models/user.dart';
+import 'package:natours_application/Features/Profile/data/models/user.dart';
 import 'package:natours_application/core/Helpers/constants.dart';
 import 'package:natours_application/core/Helpers/shared_pref_helper.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:natours_application/Features/Login/logic/cubit/login_cubit.dart';
 import 'package:natours_application/Features/Login/logic/cubit/login_state.dart';
-import 'package:natours_application/Features/User/logic/cubit/user_response_cubit.dart';
+import 'package:natours_application/Features/Profile/logic/cubit/user_response_cubit.dart';
 import 'package:natours_application/core/Helpers/extensions.dart';
 import 'package:natours_application/core/Routing/routes.dart';
 import 'package:natours_application/core/Theming/colors.dart';
@@ -15,25 +15,12 @@ class LoginBlocListener extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<LoginCubit, LoginState>(
       listenWhen: (previous, current) {
-        return current is Loading || current is Success || current is Error;
+        return current is Success || current is Error;
       },
       listener: (context, state) {
         state.whenOrNull(
-          loading: () {
-            showDialog(
-              context: context,
-              builder: (context) {
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: ColorsManager.mainGreen,
-                  ),
-                );
-              },
-            );
-          },
           success: (data) {
             context.read<UserResponseCubit>().loadUserInLoginSuccess();
-            context.pop();
             context.pushNamed(Routes.homeScreen);
           },
           error: (error) {
@@ -46,7 +33,6 @@ class LoginBlocListener extends StatelessWidget {
   }
 
   void setupErrorState(BuildContext context, String error) {
-    context.pop();
     showDialog(
       context: context,
       builder: (context) {

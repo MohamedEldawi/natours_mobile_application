@@ -11,6 +11,7 @@ class AppTextButton extends StatelessWidget {
   final String buttonText;
   final TextStyle textStyle;
   final VoidCallback onPressed;
+  final bool isLoading;
   const AppTextButton({
     this.borderRadius,
     this.verticalPadding,
@@ -20,6 +21,7 @@ class AppTextButton extends StatelessWidget {
     required this.buttonText,
     required this.textStyle,
     required this.onPressed,
+    this.isLoading = false,
     super.key,
   });
 
@@ -38,7 +40,16 @@ class AppTextButton extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: verticalPadding?.h ?? 14.h),
       ),
       onPressed: onPressed,
-      child: Text(buttonText, style: textStyle),
+      child: isLoading
+          ? SizedBox(
+              width: 20,
+              height: 20,
+              child: CircularProgressIndicator(
+                color: Colors.white,
+                strokeWidth: 2,
+              ),
+            )
+          : Text(buttonText, style: textStyle),
     );
   }
 }

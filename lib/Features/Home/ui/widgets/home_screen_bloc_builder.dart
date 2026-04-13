@@ -6,7 +6,7 @@ import 'package:natours_application/Features/Home/logic/cubit/home_screen_cubit.
 import 'package:natours_application/Features/Home/logic/cubit/home_screen_state.dart';
 import 'package:natours_application/Features/Home/ui/widgets/shimmer_loading.dart';
 import 'package:natours_application/Features/Home/ui/widgets/tours_list.dart';
-import 'package:natours_application/Features/User/logic/cubit/user_response_cubit.dart';
+import 'package:natours_application/Features/Profile/logic/cubit/user_response_cubit.dart';
 import 'package:natours_application/core/Theming/colors.dart';
 
 class HomeScreenBlocBuilder extends StatelessWidget {

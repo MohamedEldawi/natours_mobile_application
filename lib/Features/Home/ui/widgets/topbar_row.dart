@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:natours_application/Features/User/data/models/user.dart';
+import 'package:natours_application/Features/Profile/data/models/user.dart';
+import 'package:natours_application/core/Helpers/extensions.dart';
+import 'package:natours_application/core/Routing/routes.dart';
 import 'package:natours_application/core/Theming/colors.dart';
 import 'package:natours_application/core/Theming/styles.dart';
 import 'package:natours_application/core/networking/api_constants.dart';
@@ -25,18 +27,23 @@ class TopbarRow extends StatelessWidget {
           ],
         ),
         Spacer(),
-        CachedNetworkImage(
-          progressIndicatorBuilder: (context, url, progress) {
-            return Shimmer.fromColors(
-              baseColor: ColorsManager.lightGrey,
-              highlightColor: Colors.white,
-              child: CircleAvatar(radius: 24, backgroundColor: Colors.white),
-            );
+        GestureDetector(
+          onTap: () {
+            context.pushNamed(Routes.profileScreen);
           },
-          imageUrl: '${ApiConstants.baseUsersImageUrl}${user.photo}',
-          imageBuilder: (context, imageProvider) {
-            return CircleAvatar(radius: 24, backgroundImage: imageProvider);
-          },
+          child: CachedNetworkImage(
+            progressIndicatorBuilder: (context, url, progress) {
+              return Shimmer.fromColors(
+                baseColor: ColorsManager.lightGrey,
+                highlightColor: Colors.white,
+                child: CircleAvatar(radius: 24, backgroundColor: Colors.white),
+              );
+            },
+            imageUrl: '${ApiConstants.baseUsersImageUrl}${user.photo}',
+            imageBuilder: (context, imageProvider) {
+              return CircleAvatar(radius: 24, backgroundImage: imageProvider);
+            },
+          ),
         ),
       ],
     );
