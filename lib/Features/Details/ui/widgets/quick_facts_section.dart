@@ -5,6 +5,7 @@ import 'package:natours_application/Features/Details/ui/widgets/details_section_
 import 'package:natours_application/Features/Details/ui/widgets/tour_detail_title.dart';
 import 'package:natours_application/core/Helpers/spaces.dart';
 import 'package:natours_application/core/Theming/colors.dart';
+import 'package:natours_application/core/Theming/styles.dart';
 
 class QuickFactsSection extends StatelessWidget {
   final String nextDate;
@@ -37,10 +38,7 @@ class QuickFactsSection extends StatelessWidget {
               horizontalSpace(4),
               Text(
                 '${rating.toStringAsFixed(1)}  ($reviews reviews)',
-                style: TextStyle(
-                  color: ColorsManager.darkBlue,
-                  fontSize: 12.sp,
-                ),
+                style: TextStyles.font12DarkBlue400Weight,
               ),
             ],
           ),
@@ -118,9 +116,7 @@ class _FactTile extends StatelessWidget {
                   label.toUpperCase(),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: ColorsManager.grey,
-                    fontSize: 10.sp,
+                  style: TextStyles.font10Grey400Weight.copyWith(
                     letterSpacing: 0.3,
                   ),
                 ),
@@ -132,7 +128,7 @@ class _FactTile extends StatelessWidget {
             value,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(color: ColorsManager.darkBlue, fontSize: 14.sp),
+            style: TextStyles.font14DarkBlue400Weight,
           ),
         ],
       ),

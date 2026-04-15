@@ -25,8 +25,8 @@ class DetailsNetworkImage extends StatelessWidget {
       progressIndicatorBuilder: (context, url, progress) {
         return Shimmer.fromColors(
           baseColor: ColorsManager.lightGrey,
-          highlightColor: Colors.white,
-          child: Container(color: Colors.white),
+          highlightColor: ColorsManager.white,
+          child: Container(color: ColorsManager.white),
         );
       },
       errorWidget: (context, url, error) {

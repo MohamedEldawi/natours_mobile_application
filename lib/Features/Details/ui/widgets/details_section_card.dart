@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:natours_application/core/Theming/colors.dart';
 
 class DetailsSectionCard extends StatelessWidget {
   final Widget child;
@@ -14,7 +15,7 @@ class DetailsSectionCard extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 12.h),
       padding: padding ?? EdgeInsets.all(16.r),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ColorsManager.white,
         borderRadius: BorderRadius.circular(16.r),
       ),
       child: child,

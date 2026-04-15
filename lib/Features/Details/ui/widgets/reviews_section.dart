@@ -7,6 +7,7 @@ import 'package:natours_application/Features/Details/ui/widgets/tour_detail_titl
 import 'package:natours_application/Features/Home/data/models/review.dart';
 import 'package:natours_application/core/Helpers/spaces.dart';
 import 'package:natours_application/core/Theming/colors.dart';
+import 'package:natours_application/core/Theming/styles.dart';
 import 'package:natours_application/core/networking/api_constants.dart';
 
 class ReviewsSection extends StatelessWidget {
@@ -34,10 +35,7 @@ class ReviewsSection extends StatelessWidget {
               horizontalSpace(4),
               Text(
                 '${rating.toStringAsFixed(1)} - $reviewsCount reviews',
-                style: TextStyle(
-                  color: ColorsManager.darkBlue,
-                  fontSize: 12.sp,
-                ),
+                style: TextStyles.font12DarkBlue400Weight,
               ),
             ],
           ),
@@ -90,23 +88,12 @@ class _ReviewItem extends StatelessWidget {
                         Expanded(
                           child: Text(
                             review.user.name ?? '',
-                            style: TextStyle(
-                              color: ColorsManager.darkBlue,
-                              fontSize: 14.sp,
-                            ),
+                            style: TextStyles.font14DarkBlue400Weight,
                           ),
                         ),
                         DetailStars(rating: review.rating.round()),
                       ],
                     ),
-                    verticalSpace(3),
-                    // Text(
-                    //   '',
-                    //   style: TextStyle(
-                    //     color: ColorsManager.lightGrey,
-                    //     fontSize: 12.sp,
-                    //   ),
-                    // ), // for date or other info if needed in future
                   ],
                 ),
               ),
@@ -115,11 +102,7 @@ class _ReviewItem extends StatelessWidget {
           verticalSpace(8),
           Text(
             review.review,
-            style: TextStyle(
-              color: ColorsManager.grey,
-              fontSize: 13.sp,
-              height: 1.55,
-            ),
+            style: TextStyles.font13Grey400Weight.copyWith(height: 1.55),
           ),
         ],
       ),

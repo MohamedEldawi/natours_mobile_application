@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:natours_application/Features/Details/ui/widgets/details_section_card.dart';
 import 'package:natours_application/core/Theming/colors.dart';
+import 'package:natours_application/core/Theming/styles.dart';
 
 class BookingSummaryCard extends StatelessWidget {
   final double price;
@@ -24,28 +25,18 @@ class BookingSummaryCard extends StatelessWidget {
                     children: [
                       TextSpan(
                         text: '\$${price.toStringAsFixed(0)}',
-                        style: TextStyle(
-                          color: ColorsManager.darkBlue,
-                          fontSize: 24.sp,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        style: TextStyles.font24DarkBlue500Weight,
                       ),
                       TextSpan(
                         text: ' / person',
-                        style: TextStyle(
-                          color: ColorsManager.grey,
-                          fontSize: 13.sp,
-                        ),
+                        style: TextStyles.font13Grey400Weight,
                       ),
                     ],
                   ),
                 ),
                 Text(
                   '$stops stops included',
-                  style: TextStyle(
-                    color: ColorsManager.lightGrey,
-                    fontSize: 12.sp,
-                  ),
+                  style: TextStyles.font12LightGrey400Weight,
                 ),
               ],
             ),
@@ -64,7 +55,7 @@ class BookingSummaryCard extends StatelessWidget {
               onPressed: () {},
               child: Text(
                 'Book Now',
-                style: TextStyle(color: Colors.white, fontSize: 14.sp),
+                style: TextStyles.font14White400Weight,
               ),
             ),
           ),

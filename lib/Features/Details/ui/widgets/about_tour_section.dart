@@ -4,6 +4,7 @@ import 'package:natours_application/Features/Details/ui/widgets/details_section_
 import 'package:natours_application/Features/Details/ui/widgets/tour_detail_title.dart';
 import 'package:natours_application/core/Helpers/spaces.dart';
 import 'package:natours_application/core/Theming/colors.dart';
+import 'package:natours_application/core/Theming/styles.dart';
 
 class AboutTourSection extends StatelessWidget {
   final String description;
@@ -22,11 +23,7 @@ class AboutTourSection extends StatelessWidget {
             description,
             maxLines: 6,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              color: ColorsManager.grey,
-              fontSize: 14.sp,
-              height: 1.6,
-            ),
+            style: TextStyles.font14Grey400Weight.copyWith(height: 1.6),
           ),
           verticalSpace(8),
           Row(
@@ -34,11 +31,7 @@ class AboutTourSection extends StatelessWidget {
             children: [
               Text(
                 'Read more',
-                style: TextStyle(
-                  color: ColorsManager.mainGreen,
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: TextStyles.font14MainGreen500Weight,
               ),
               horizontalSpace(2),
               Icon(

@@ -6,6 +6,7 @@ import 'package:natours_application/Features/Details/ui/widgets/tour_detail_titl
 import 'package:natours_application/Features/Profile/data/models/user.dart';
 import 'package:natours_application/core/Helpers/spaces.dart';
 import 'package:natours_application/core/Theming/colors.dart';
+import 'package:natours_application/core/Theming/styles.dart';
 import 'package:natours_application/core/networking/api_constants.dart';
 
 class TourGuidesSection extends StatelessWidget {
@@ -60,12 +61,12 @@ class _GuideAvatar extends StatelessWidget {
         verticalSpace(6),
         Text(
           guide.name ?? '',
-          style: TextStyle(color: ColorsManager.darkBlue, fontSize: 12.sp),
+          style: TextStyles.font12DarkBlue400Weight,
         ),
         verticalSpace(2),
         Text(
           _roleText,
-          style: TextStyle(color: ColorsManager.grey, fontSize: 11.sp),
+          style: TextStyles.font11Grey400weight,
         ),
       ],
     );

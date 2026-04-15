@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:natours_application/core/Theming/colors.dart';
+import 'package:natours_application/core/Theming/styles.dart';
 
 class TourDetailTitle extends StatelessWidget {
   final String title;
@@ -11,11 +10,7 @@ class TourDetailTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: TextStyle(
-        fontSize: 16.sp,
-        fontWeight: FontWeight.w500,
-        color: ColorsManager.darkBlue,
-      ),
+      style: TextStyles.font16DarkBlue500Weight,
     );
   }
 }
