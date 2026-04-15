@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:natours_application/Features/Details/details_screen.dart';
+import 'package:natours_application/Features/Details/ui/screens/details_screen.dart';
+import 'package:natours_application/Features/Home/data/models/tours_response.dart';
 import 'package:natours_application/Features/Home/data/repos/home_screen_repo.dart';
 import 'package:natours_application/Features/Home/logic/cubit/home_screen_cubit.dart';
 import 'package:natours_application/Features/Home/ui/screens/home_screen.dart';
@@ -46,7 +47,12 @@ class AppRouter {
           ),
         );
       case Routes.detailsScreen:
-        return MaterialPageRoute(builder: (context) => const DetailsScreen());
+        final tour = settings.arguments is TourModel
+            ? settings.arguments as TourModel
+            : null;
+        return MaterialPageRoute(
+          builder: (context) => DetailsScreen(tour: tour),
+        );
       case Routes.profileScreen:
         return MaterialPageRoute(builder: (context) => const ProfileScreen());
       // default:

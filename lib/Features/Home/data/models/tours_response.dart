@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:natours_application/Features/Home/data/models/review.dart';
 import 'package:natours_application/Features/Home/data/models/start_location.dart';
+import 'package:natours_application/Features/Profile/data/models/user.dart';
 part 'tours_response.g.dart';
 
 @JsonSerializable(explicitToJson: true)
@@ -39,6 +41,8 @@ class TourModel {
   final String? imageCover;
   final List<String>? images;
   final List<String>? startDates;
+  final List<User>? guides;
+  final List<Review>? reviews;
 
   TourModel(
     this.id,
@@ -55,6 +59,8 @@ class TourModel {
     this.images,
     this.startDates,
     this.startLocation,
+    this.guides,
+    this.reviews,
   );
   factory TourModel.fromJson(Map<String, dynamic> json) =>
       _$TourModelFromJson(json);

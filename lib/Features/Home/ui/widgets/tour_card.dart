@@ -21,6 +21,7 @@ class TourCard extends StatelessWidget {
       child: Column(
         children: [
           TourCardImageAndName(
+            tourId: tour?.id ?? '',
             image: '${ApiConstants.baseToursImageUrl}${tour!.imageCover}',
             tourName: tour?.name ?? 'name',
           ),
@@ -34,6 +35,7 @@ class TourCard extends StatelessWidget {
             stops: tour?.startDates!.length ?? 0,
           ),
           TourCardFooter(
+            tour: tour,
             price: tour?.price ?? 0,
             rating: tour?.ratingsAverage ?? 0,
             ratingsNumber: tour?.ratingsQuantity ?? 0,
