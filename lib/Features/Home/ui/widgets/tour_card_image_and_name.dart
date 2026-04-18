@@ -9,46 +9,51 @@ import 'package:shimmer/shimmer.dart';
 class TourCardImageAndName extends StatelessWidget {
   final String image;
   final String tourName;
+  final String tourId;
   const TourCardImageAndName({
     super.key,
     required this.image,
     required this.tourName,
+    required this.tourId,
   });
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       flex: 2,
-      child: CachedNetworkImage(
-        progressIndicatorBuilder: (context, url, progress) {
-          return Shimmer.fromColors(
-            baseColor: ColorsManager.lightGrey,
-            highlightColor: Colors.white,
-            child: Container(width: double.infinity, color: Colors.white),
-          );
-        },
-        imageUrl: image,
-        imageBuilder: (context, imageProvider) {
-          return Stack(
-            children: [
-              ClipPath(
-                clipper: BottomCurve(),
-                child: Container(
-                  width: double.infinity,
-                  foregroundDecoration: BoxDecoration(
-                    color: Colors.green.withValues(alpha: 0.5),
+      child: Hero(
+        tag: tourId,
+        child: CachedNetworkImage(
+          progressIndicatorBuilder: (context, url, progress) {
+            return Shimmer.fromColors(
+              baseColor: ColorsManager.lightGrey,
+              highlightColor: Colors.white,
+              child: Container(width: double.infinity, color: Colors.white),
+            );
+          },
+          imageUrl: image,
+          imageBuilder: (context, imageProvider) {
+            return Stack(
+              children: [
+                ClipPath(
+                  clipper: BottomCurve(),
+                  child: Container(
+                    width: double.infinity,
+                    foregroundDecoration: BoxDecoration(
+                      color: Colors.green.withValues(alpha: 0.5),
+                    ),
+                    child: Image(image: imageProvider, fit: BoxFit.cover),
                   ),
-                  child: Image(image: imageProvider, fit: BoxFit.cover),
                 ),
-              ),
-              Positioned(
-                right: 20,
-                bottom: 5,
-                child: buildTourName(tourName: tourName),
-              ),
-            ],
-          );
-        },
+                Positioned(
+                  right: 20,
+                  bottom: 5,
+                  child: buildTourName(tourName: tourName),
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }

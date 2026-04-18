@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:natours_application/Features/Home/data/models/tours_response.dart';
 import 'package:natours_application/core/Helpers/extensions.dart';
 import 'package:natours_application/core/Routing/routes.dart';
 import 'package:natours_application/core/Theming/colors.dart';
 import 'package:natours_application/core/Theming/styles.dart';
 
 class TourCardFooter extends StatelessWidget {
+  final TourModel? tour;
   final double price;
   final double rating;
   final int ratingsNumber;
   const TourCardFooter({
     super.key,
+    required this.tour,
     required this.price,
     required this.rating,
     required this.ratingsNumber,
@@ -65,7 +68,7 @@ class TourCardFooter extends StatelessWidget {
                 backgroundColor: ColorsManager.mainGreen,
               ),
               onPressed: () {
-                context.pushNamed(Routes.detailsScreen);
+                context.pushNamed(Routes.detailsScreen, arguments: tour);
               },
               child: Text('DETAILS', style: TextStyle(color: Colors.white)),
             ),
