@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:natours_application/Features/Details/ui/screens/details_screen.dart';
+import 'package:natours_application/Features/Details/ui/screens/gallery_screen.dart';
 import 'package:natours_application/Features/Home/data/models/tours_response.dart';
 import 'package:natours_application/Features/Home/data/repos/home_screen_repo.dart';
 import 'package:natours_application/Features/Home/logic/cubit/home_screen_cubit.dart';
@@ -14,6 +15,16 @@ import 'package:natours_application/Features/Signup/ui/signup_screen.dart';
 import 'package:natours_application/Features/splash/splash_screen.dart';
 import 'package:natours_application/core/Routing/routes.dart';
 import 'package:natours_application/core/di/dependency_injection.dart';
+
+class GalleryScreenArguments {
+  final List<String> imageUrls;
+  final int initialIndex;
+
+  const GalleryScreenArguments({
+    required this.imageUrls,
+    required this.initialIndex,
+  });
+}
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -52,6 +63,20 @@ class AppRouter {
             : null;
         return MaterialPageRoute(
           builder: (context) => DetailsScreen(tour: tour),
+        );
+      case Routes.galleryScreen:
+        final arguments = settings.arguments;
+        final galleryArguments = arguments is GalleryScreenArguments
+            ? arguments
+            : const GalleryScreenArguments(
+                imageUrls: <String>[],
+                initialIndex: 0,
+              );
+        return MaterialPageRoute(
+          builder: (context) => GalleryScreen(
+            imageUrls: galleryArguments.imageUrls,
+            initialIndex: galleryArguments.initialIndex,
+          ),
         );
       case Routes.profileScreen:
         return MaterialPageRoute(builder: (context) => const ProfileScreen());

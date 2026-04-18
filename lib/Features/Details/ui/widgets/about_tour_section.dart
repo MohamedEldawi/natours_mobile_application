@@ -6,11 +6,17 @@ import 'package:natours_application/core/Helpers/spaces.dart';
 import 'package:natours_application/core/Theming/colors.dart';
 import 'package:natours_application/core/Theming/styles.dart';
 
-class AboutTourSection extends StatelessWidget {
+class AboutTourSection extends StatefulWidget {
   final String description;
 
   const AboutTourSection({super.key, required this.description});
 
+  @override
+  State<AboutTourSection> createState() => _AboutTourSectionState();
+}
+
+class _AboutTourSectionState extends State<AboutTourSection> {
+  bool isCollapsed = true;
   @override
   Widget build(BuildContext context) {
     return DetailsSectionCard(
@@ -19,27 +25,41 @@ class AboutTourSection extends StatelessWidget {
         children: [
           const TourDetailTitle('About this Tour'),
           verticalSpace(12),
-          Text(
-            description,
-            maxLines: 6,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyles.font14Grey400Weight.copyWith(height: 1.6),
+          AnimatedSize(
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+            alignment: Alignment.topCenter,
+            child: Text(
+              widget.description,
+              maxLines: isCollapsed ? 6 : null,
+              overflow: isCollapsed ? TextOverflow.ellipsis : null,
+              style: TextStyles.font14Grey400Weight.copyWith(height: 1.6),
+            ),
           ),
           verticalSpace(8),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'Read more',
-                style: TextStyles.font14MainGreen500Weight,
-              ),
-              horizontalSpace(2),
-              Icon(
-                Icons.keyboard_arrow_down,
-                size: 18.r,
-                color: ColorsManager.mainGreen,
-              ),
-            ],
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                isCollapsed = !isCollapsed;
+              });
+            },
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  isCollapsed ? 'Read more' : 'Show less',
+                  style: TextStyles.font14MainGreen500Weight,
+                ),
+                horizontalSpace(2),
+                Icon(
+                  isCollapsed
+                      ? Icons.keyboard_arrow_down
+                      : Icons.keyboard_arrow_up,
+                  size: 18.r,
+                  color: ColorsManager.mainGreen,
+                ),
+              ],
+            ),
           ),
         ],
       ),
