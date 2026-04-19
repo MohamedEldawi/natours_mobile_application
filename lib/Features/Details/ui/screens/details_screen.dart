@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:natours_application/Features/Details/ui/widgets/about_tour_section.dart';
@@ -11,6 +12,7 @@ import 'package:natours_application/Features/Details/ui/widgets/tour_guides_sect
 import 'package:natours_application/Features/Home/data/models/review.dart';
 import 'package:natours_application/Features/Home/data/models/tours_response.dart';
 import 'package:natours_application/Features/Profile/data/models/user.dart';
+import 'package:natours_application/Features/payment/logic/cubit/payment_cubit.dart';
 import 'package:natours_application/core/Helpers/spaces.dart';
 import 'package:natours_application/core/Theming/colors.dart';
 import 'package:natours_application/core/networking/api_constants.dart';
@@ -27,59 +29,74 @@ class DetailsScreen extends StatelessWidget {
     final reviews = tour?.reviews ?? <Review>[];
     final reviewsCount = tour?.ratingsQuantity ?? reviews.length;
 
-    return Scaffold(
-      backgroundColor: ColorsManager.gray100,
-      body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverDetailsAppBar(
-              tourId: tour?.id ?? '',
-              imageUrl: _tourImageUrl(tour?.imageCover),
-              name: tour?.name ?? '',
-              location: tour?.startLocation?.description ?? '',
-              difficulty: tour?.difficulty ?? '',
-              duration: tour?.duration ?? 0,
-            ),
-            SliverList(
-              delegate: SliverChildListDelegate([
-                Column(
-                  children: [
-                    verticalSpace(24.h),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.w),
-                      child: Column(
-                        children: [
-                          QuickFactsSection(
-                            nextDate: _formattedNextDate,
-                            difficulty: tour?.difficulty ?? '',
-                            participants: tour?.maxGroupSize ?? 0,
-                            duration: tour?.duration ?? 0,
-                            rating: tour?.ratingsAverage ?? 0,
-                            reviews: reviewsCount,
-                          ),
-                          TourGuidesSection(guides: guides),
-                          AboutTourSection(
-                            description: tour?.description ?? '',
-                          ),
-                          TourGallerySection(imageUrls: galleryImages),
-                          ReviewsSection(
-                            rating: tour?.ratingsAverage ?? 0,
-                            reviewsCount: reviewsCount,
-                            reviews: reviews,
-                          ),
-                          BookingSummaryCard(
-                            price: tour?.price ?? 0,
-                            stops: tour?.startDates?.length ?? 0,
-                          ),
-                          SizedBox(height: 20.h),
-                        ],
+    return BlocListener<PaymentCubit, PaymentState>(
+      listener: (context, state) {
+        final messenger = ScaffoldMessenger.of(context);
+        messenger.hideCurrentSnackBar();
+
+        if (state is PaymentSuccess) {
+          messenger.showSnackBar(
+            const SnackBar(content: Text('Payment completed successfully')),
+          );
+        } else if (state is ClientSecretError) {
+          messenger.showSnackBar(SnackBar(content: Text(state.message)));
+        }
+      },
+      child: Scaffold(
+        backgroundColor: ColorsManager.gray100,
+        body: SafeArea(
+          child: CustomScrollView(
+            slivers: [
+              SliverDetailsAppBar(
+                tourId: tour?.id ?? '',
+                imageUrl: _tourImageUrl(tour?.imageCover),
+                name: tour?.name ?? '',
+                location: tour?.startLocation?.description ?? '',
+                difficulty: tour?.difficulty ?? '',
+                duration: tour?.duration ?? 0,
+              ),
+              SliverList(
+                delegate: SliverChildListDelegate([
+                  Column(
+                    children: [
+                      verticalSpace(24.h),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
+                        child: Column(
+                          children: [
+                            QuickFactsSection(
+                              nextDate: _formattedNextDate,
+                              difficulty: tour?.difficulty ?? '',
+                              participants: tour?.maxGroupSize ?? 0,
+                              duration: tour?.duration ?? 0,
+                              rating: tour?.ratingsAverage ?? 0,
+                              reviews: reviewsCount,
+                            ),
+                            TourGuidesSection(guides: guides),
+                            AboutTourSection(
+                              description: tour?.description ?? '',
+                            ),
+                            TourGallerySection(imageUrls: galleryImages),
+                            ReviewsSection(
+                              rating: tour?.ratingsAverage ?? 0,
+                              reviewsCount: reviewsCount,
+                              reviews: reviews,
+                            ),
+                            BookingSummaryCard(
+                              tourId: tour?.id ?? '',
+                              price: tour?.price ?? 0,
+                              stops: tour?.startDates?.length ?? 0,
+                            ),
+                            SizedBox(height: 20.h),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ]),
-            ),
-          ],
+                    ],
+                  ),
+                ]),
+              ),
+            ],
+          ),
         ),
       ),
     );

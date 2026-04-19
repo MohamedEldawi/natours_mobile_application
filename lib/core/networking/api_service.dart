@@ -5,6 +5,7 @@ import 'package:natours_application/Features/Login/data/models/login_response_bo
 import 'package:natours_application/Features/Signup/data/models/signup_request_body.dart';
 import 'package:natours_application/Features/Signup/data/models/signup_response_body.dart';
 import 'package:natours_application/Features/Profile/data/models/user.dart';
+import 'package:natours_application/Features/payment/data/model/payment_intent_response.dart';
 import 'package:natours_application/core/networking/api_constants.dart';
 import 'package:retrofit/retrofit.dart';
 part 'api_service.g.dart';
@@ -22,4 +23,8 @@ abstract class ApiService {
   Future<ToursResponse> getAllTours();
   @GET(ApiConstants.getMe)
   Future<UserResponseModel> getUserData();
+  @POST(ApiConstants.payment)
+  Future<PaymentIntentResponse> getClientSecret(
+    @Body() Map<String, String> body,
+  );
 }
