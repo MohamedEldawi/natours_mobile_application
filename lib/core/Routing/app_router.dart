@@ -12,6 +12,7 @@ import 'package:natours_application/Features/Onboarding/onboarding_screen.dart';
 import 'package:natours_application/Features/Profile/ui/profile_screen.dart';
 import 'package:natours_application/Features/Signup/logic/cubit/signup_cubit.dart';
 import 'package:natours_application/Features/Signup/ui/signup_screen.dart';
+import 'package:natours_application/Features/payment/logic/cubit/payment_cubit.dart';
 import 'package:natours_application/Features/splash/splash_screen.dart';
 import 'package:natours_application/core/Routing/routes.dart';
 import 'package:natours_application/core/di/dependency_injection.dart';
@@ -62,7 +63,10 @@ class AppRouter {
             ? settings.arguments as TourModel
             : null;
         return MaterialPageRoute(
-          builder: (context) => DetailsScreen(tour: tour),
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<PaymentCubit>(),
+            child: DetailsScreen(tour: tour),
+          ),
         );
       case Routes.galleryScreen:
         final arguments = settings.arguments;
