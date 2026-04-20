@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "461779055526",
+    "project_id": "natours-app-distribution",
+    "storage_bucket": "natours-app-distribution.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:461779055526:android:834e1269780a93afc11567",
+        "android_client_info": {
+          "package_name": "com.example.natours_application.production"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkW9bi67-FT3bMadgicntwtRAfk5JxEnM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
