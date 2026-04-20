@@ -59,7 +59,7 @@ class BookingSummaryCard extends StatelessWidget {
                   textStyle: TextStyles.font14White400Weight,
                   buttonWidth: 100.w,
                   borderRadius: 28.r,
-                  isLoading: state is ClientSecretLoading,
+                  isLoading: state is PaymentLoading,
 
                   onPressed: () {
                     context.read<PaymentCubit>().pay(tourId: tourId);

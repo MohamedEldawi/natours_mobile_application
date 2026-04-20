@@ -36,10 +36,22 @@ class DetailsScreen extends StatelessWidget {
 
         if (state is PaymentSuccess) {
           messenger.showSnackBar(
-            const SnackBar(content: Text('Payment completed successfully')),
+            const SnackBar(
+              content: Text('Payment completed successfully'),
+              backgroundColor: ColorsManager.mainGreen,
+            ),
           );
-        } else if (state is ClientSecretError) {
-          messenger.showSnackBar(SnackBar(content: Text(state.message)));
+        } else if (state is PaymentError) {
+          messenger.showSnackBar(
+            SnackBar(content: Text(state.message), backgroundColor: Colors.red),
+          );
+        } else if (state is PaymentCanceled) {
+          messenger.showSnackBar(
+            const SnackBar(
+              content: Text('Payment canceled'),
+              backgroundColor: Colors.red,
+            ),
+          );
         }
       },
       child: Scaffold(

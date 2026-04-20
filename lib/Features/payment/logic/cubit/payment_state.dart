@@ -5,11 +5,13 @@ sealed class PaymentState {}
 
 final class PaymentInitial extends PaymentState {}
 
-final class ClientSecretLoading extends PaymentState {}
+final class PaymentLoading extends PaymentState {}
 
 final class PaymentSuccess extends PaymentState {}
 
-final class ClientSecretError extends PaymentState {
+final class PaymentCanceled extends PaymentState {}
+
+final class PaymentError extends PaymentState {
   final String message;
-  ClientSecretError(this.message);
+  PaymentError(this.message);
 }
