@@ -12,45 +12,47 @@ class PaymentCubit extends Cubit<PaymentState> {
   PaymentCubit(this._paymentRepo) : super(PaymentInitial());
   String? _clientSecret;
 
-  Future<void> _getClientSecret(String tourId) async {
-    emit(ClientSecretLoading());
+  Future<void> pay({required String tourId}) async {
+    emit(PaymentLoading());
     final response = await _paymentRepo.getClientSecret(tourId);
     response.when(
-      success: (clientSecret) => _clientSecret = clientSecret,
+      success: (clientSecret) async {
+        _clientSecret = clientSecret;
+        try {
+          await Stripe.instance.initPaymentSheet(
+            paymentSheetParameters: SetupPaymentSheetParameters(
+              paymentIntentClientSecret: _clientSecret!,
+              merchantDisplayName: 'Natours',
+            ),
+          );
+        } on StripeException catch (e) {
+          emit(
+            PaymentError(
+              e.error.localizedMessage ?? 'Payment initialization failed',
+            ),
+          );
+          return;
+        } catch (_) {
+          emit(PaymentError('An unexpected error occurred'));
+          return;
+        }
+        try {
+          await Stripe.instance.presentPaymentSheet();
+          emit(PaymentSuccess());
+        } on StripeException catch (e) {
+          if (e.error.code == FailureCode.Canceled) {
+            emit(PaymentCanceled());
+          } else {
+            emit(PaymentError(e.error.localizedMessage ?? 'Payment failed'));
+          }
+        } catch (_) {
+          emit(PaymentError('An unexpected error occurred'));
+        }
+      },
       failure: (error) {
         _clientSecret = null;
-        emit(ClientSecretError(error.message));
+        emit(PaymentError(error.message));
       },
     );
-  }
-
-  Future<void> _initPaymentSheet() async {
-    try {
-      await Stripe.instance.initPaymentSheet(
-        paymentSheetParameters: SetupPaymentSheetParameters(
-          paymentIntentClientSecret: _clientSecret!,
-          merchantDisplayName: 'Natours',
-        ),
-      );
-    } catch (e) {
-      emit(ClientSecretError('Failed to initialize payment sheet: $e'));
-    }
-  }
-
-  Future<void> _presentPaymentSheet() async {
-    try {
-      await Stripe.instance.presentPaymentSheet();
-      emit(PaymentSuccess());
-    } catch (e) {
-      emit(ClientSecretError('Failed to present payment sheet: $e'));
-    }
-  }
-
-  Future<void> pay({required String tourId}) async {
-    await _getClientSecret(tourId);
-    if (_clientSecret != null) {
-      await _initPaymentSheet();
-      await _presentPaymentSheet();
-    }
   }
 }
