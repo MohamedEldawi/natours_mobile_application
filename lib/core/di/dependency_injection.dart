@@ -7,6 +7,8 @@ import 'package:natours_application/Features/Login/logic/cubit/login_cubit.dart'
 import 'package:natours_application/Features/Signup/data/repos/signup_repo.dart';
 import 'package:natours_application/Features/Signup/logic/cubit/signup_cubit.dart';
 import 'package:natours_application/Features/Profile/data/repos/user_repo.dart';
+import 'package:natours_application/Features/payment/logic/cubit/payment_cubit.dart';
+import 'package:natours_application/Features/payment/data/repo/payment_repo.dart';
 import 'package:natours_application/core/networking/api_service.dart';
 import 'package:natours_application/core/networking/dio_factory.dart';
 
@@ -41,4 +43,8 @@ Future<void> setupGetIt() async {
   );
   // User
   getIt.registerLazySingleton(() => Userrepo(apiService: getIt<ApiService>()));
+
+  // Payment
+  getIt.registerLazySingleton(() => PaymentRepo(getIt<ApiService>()));
+  getIt.registerFactory<PaymentCubit>(() => PaymentCubit(getIt<PaymentRepo>()));
 }

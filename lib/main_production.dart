@@ -10,6 +10,7 @@ import 'package:natours_application/core/di/dependency_injection.dart';
 import 'package:natours_application/core/services/hive_service.dart';
 import 'package:natours_application/core/services/user_service.dart';
 import 'package:natours_application/natours_app.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,6 +19,8 @@ void main() async {
   await checkIfUserLoggedIn();
   await setupGetIt();
   await getIt<ToursCacheService>().init();
+  Stripe.publishableKey =
+      'pk_test_51SnhntE5SUNREJwQjcLNKi0iVXpeTxO3X7lfNJifxHI0T86FgjPtCMkdw0Df0oygNwqxCudwvJ63C7OcZngMIgZr00emFRCS28';
   runApp(
     MultiBlocProvider(
       providers: [
