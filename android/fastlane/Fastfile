@@ -1,19 +1,14 @@
-require 'dotenv'
-dotenv_path = File.expand_path('../../.env', __dir__)
-Dotenv.load(dotenv_path) if File.exist?(dotenv_path)
+
 
 default_platform(:android)
 
 platform :android do
   desc "distribute a new release build to firebase app distribution"
   lane :distribute do
-    UI.user_error!("Missing APP_ID in #{dotenv_path}") if ENV["APP_ID"].to_s.strip.empty?
-    UI.user_error!("Missing FIREBASE_CLI_TOKEN in #{dotenv_path}") if ENV["FIREBASE_CLI_TOKEN"].to_s.strip.empty?
-
     # sh "flutter clean"
     sh "flutter build apk --release --flavor production --target lib/main_production.dart --no-tree-shake-icons"
     release = firebase_app_distribution(
-            app: ENV["APP_ID"],
+            app:1:461779055526:android:834e1269780a93afc11567,
             firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
             android_artifact_type: "APK",
             android_artifact_path: "../build/app/outputs/flutter-apk/app-production-release.apk",
