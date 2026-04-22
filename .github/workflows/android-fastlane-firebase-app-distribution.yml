@@ -31,6 +31,10 @@ jobs:
           bundler-cache: true
           working-directory: android
 
+      - name: Install gems
+        run: bundle install
+        working-directory: android
+
       - name: Run Fastlane
         run: |
           bundle exec fastlane android distribute
